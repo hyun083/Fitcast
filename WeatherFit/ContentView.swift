@@ -10,9 +10,7 @@ import WeatherKit
 import CoreLocation
 
 struct ContentView: View {
-    @ObservedObject var viewModel = WeatherFitViewModel(startTime: "1:00", endTime: "13:00")
-//    @State var startTime = viewModel.startTime
-//    @State var endTime = viewModel.endTime
+    @ObservedObject var viewModel = Closet(model: Weather(startTime: "1:00", endTime: "2:00"))
 //    @State var location = ""
     
     var body: some View {
@@ -25,13 +23,17 @@ struct ContentView: View {
                         .font(.largeTitle)
                     Text(viewModel.currCondition())
                     Image(systemName: "cloud.sun.fill")
-                    Text("외출시 평균 기온")
-                    Text("\(viewModel.startTime) ~ \(viewModel.endTime)")
-                    Text("\(viewModel.avgTemperature()) \(viewModel.currTemp().unit.symbol)")
+                    VStack{
+                        Text("외출시 평균 기온")
+                        Text("\(viewModel.startTime) ~ \(viewModel.endTime)")
+                        Text("\(viewModel.avgTemperature()) \(viewModel.currTemp().unit.symbol)")
+                    }
+                    .padding(.vertical)
+                    
                     Button(action: {
                         viewModel.changeTimeRange()
                     }, label: {
-                        /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                        Text("변경")
                     })
                 }
                 
@@ -44,21 +46,18 @@ struct ContentView: View {
                     .fixedSize()
                 }
                 .padding(.all)
+                
+                Text(viewModel.recommendFit)
             }
             
             
             Spacer()
             VStack{
-                
                 HStack{
                     timePicker(selectedTime: $viewModel.startTime)
                     timePicker(selectedTime: $viewModel.endTime)
                 }
             }
-//            TextField("location", text: $location)
-//                .padding()
-//                .background(Color(uiColor: .secondarySystemBackground))
-//                .textFieldStyle(.roundedBorder)
         }
         .task {
             await viewModel.update()
