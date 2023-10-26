@@ -11,8 +11,10 @@
 		D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C62ADE85A400CACFC6 /* ContentView.swift */; };
 		D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640C82ADE85A600CACFC6 /* Assets.xcassets */; };
 		D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */; };
-		D20640D32ADE865D00CACFC6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640D22ADE865D00CACFC6 /* Weather.swift */; };
+		D20640D32ADE865D00CACFC6 /* CustomWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640D22ADE865D00CACFC6 /* CustomWeather.swift */; };
 		D20640D62ADFDFBE00CACFC6 /* Closet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640D52ADFDFBE00CACFC6 /* Closet.swift */; };
+		D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */; };
+		D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,9 +23,11 @@
 		D20640C62ADE85A400CACFC6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D20640C82ADE85A600CACFC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D20640D22ADE865D00CACFC6 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		D20640D22ADE865D00CACFC6 /* CustomWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWeather.swift; sourceTree = "<group>"; };
 		D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherFit.entitlements; sourceTree = "<group>"; };
 		D20640D52ADFDFBE00CACFC6 /* Closet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closet.swift; sourceTree = "<group>"; };
+		D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitManager.swift; sourceTree = "<group>"; };
+		D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +63,9 @@
 				D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */,
 				D20640C42ADE85A400CACFC6 /* WeatherFitApp.swift */,
 				D20640C62ADE85A400CACFC6 /* ContentView.swift */,
-				D20640D22ADE865D00CACFC6 /* Weather.swift */,
+				D20640D22ADE865D00CACFC6 /* CustomWeather.swift */,
+				D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */,
+				D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */,
 				D20640D52ADFDFBE00CACFC6 /* Closet.swift */,
 				D20640C82ADE85A600CACFC6 /* Assets.xcassets */,
 				D20640CA2ADE85A600CACFC6 /* Preview Content */,
@@ -146,8 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */,
-				D20640D32ADE865D00CACFC6 /* Weather.swift in Sources */,
+				D20640D32ADE865D00CACFC6 /* CustomWeather.swift in Sources */,
 				D20640C52ADE85A400CACFC6 /* WeatherFitApp.swift in Sources */,
+				D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */,
+				D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */,
 				D20640D62ADFDFBE00CACFC6 /* Closet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
