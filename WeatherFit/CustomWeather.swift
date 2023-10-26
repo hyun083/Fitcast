@@ -10,13 +10,9 @@ import WeatherKit
 import CoreLocation
 import SwiftUI
 
-struct Weather{
-    private let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
-    private let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
-    private let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
-    private let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
+struct CustomWeather{
+    var userAddress = "초기값"
     
-    private var location: CLLocation
     private (set) var currTemp: Measurement<UnitTemperature>
     private (set) var currCondition: WeatherCondition
     private (set) var hourlyWeather = [WeatherInfo]()
@@ -28,8 +24,11 @@ struct Weather{
             Int(startTime.split(separator: ":")[0])!...Int(endTime.split(separator: ":")[0])!
         }
     }
-    
     private (set) var avgTemp = 0
+    private let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
+    private let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
+    private let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
+    private let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
     var recommendFit: String{
         get{
             if avgTemp <= 4{
@@ -53,19 +52,13 @@ struct Weather{
     }
     
     init(startTime:String, endTime:String){
-        self.location = CLLocation(latitude: 37.27807821976637, longitude: 127.15216520791188)
         self.currTemp = Measurement<UnitTemperature>(value: 0.00, unit: UnitTemperature.celsius)
         self.currCondition = WeatherCondition(rawValue: "cloudy") ?? .clear
         self.startTime = startTime
         self.endTime = endTime
     }
     
-    mutating func update(by service:WeatherService) async{
-        guard let info = try? await service.weather(for: location) else{
-            print("service error")
-            return
-        }
-        
+    mutating func update(by info:Weather){
         currCondition = info.currentWeather.condition
         currTemp = info.currentWeather.temperature
         
@@ -77,7 +70,7 @@ struct Weather{
             let info = info.hourlyForecast[id]
             let hour = Int(Calendar.current.component(.hour, from: info.date))
             
-            print(id-1, hour)
+            //            print(id-1, hour)
             if timeRange.contains(hour) {
                 sum += Int(info.temperature.value.rounded())
             }
@@ -93,8 +86,8 @@ struct Weather{
     mutating func changeTimeRange() {
         var sum = 0
         let now = Int(Calendar.current.component(.hour, from: Date()))
-        var start = Int(startTime.split(separator: ":")[0])!
-        let end = Int(endTime.split(separator: ":")[0])!
+        var start = Int(startTime.split(separator: ":")[0]) ?? 7
+        let end = Int(endTime.split(separator: ":")[0]) ?? 9
         print(start, end)
         start += start<now ? 24:0
         let range = start<=end ? start...end:start...end+24
