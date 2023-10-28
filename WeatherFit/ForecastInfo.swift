@@ -11,7 +11,8 @@ import WeatherKit
 struct ForecastInfo{
     private (set) var currTemperature: Measurement<UnitTemperature>
     private (set) var currCondition: WeatherCondition
-    private (set) var hourlyWeather : Array<WeatherInfo>
+    private (set) var currSymbol: String
+    private (set) var hourlyWeather: Array<WeatherInfo>
     
     struct WeatherInfo: Identifiable{
         var id: Int
@@ -21,8 +22,9 @@ struct ForecastInfo{
         var symbolName: String
     }
     
-    init(currTemperature: Measurement<UnitTemperature>, currCondition: WeatherCondition, createForecastInfo: (Int) -> WeatherInfo) {
+    init(currTemperature: Measurement<UnitTemperature>, currSymbol: String, currCondition: WeatherCondition, createForecastInfo: (Int) -> WeatherInfo) {
         self.currTemperature = currTemperature
+        self.currSymbol = currSymbol
         self.currCondition = currCondition
         hourlyWeather = Array<WeatherInfo>()
         
