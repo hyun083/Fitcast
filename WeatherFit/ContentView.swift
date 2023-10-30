@@ -71,8 +71,24 @@ struct WeatherView: View{
     var body: some View{
         VStack{
             Text("\(Calendar.current.component(.hour, from: date))")
-            Image(systemName: symbol)
-                .font(.title)
+            ZStack{
+                // the darker inset image
+                Image(systemName: symbol+".fill")
+                    .renderingMode(.original)
+                
+                // black inner shadow
+                Rectangle()
+                    .inverseMask(Image(systemName: symbol+".fill"))
+                    .shadow(color: Color.gray, radius: 1, x: 0, y: 1)
+                    .mask(Image(systemName: symbol+".fill"))
+                    .clipped()
+                
+                // white bottom edges
+                Image(systemName: symbol+".fill")
+                    .shadow(color: Color.white, radius: 1, x: 0, y: 1.3)
+                    .inverseMask(Image(systemName: symbol+".fill"))
+            }
+            .font(.title)
             Text("\(Int(temp.value.rounded()))")
         }
     }
@@ -107,4 +123,16 @@ struct timePicker: View{
 
 #Preview {
     ContentView()
+}
+
+extension View {
+    // https://www.raywenderlich.com/7589178-how-to-create-a-neumorphic-design-with-swiftui
+    func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
+        self.mask(mask
+            .foregroundColor(.black)
+            .background(Color.white)
+            .compositingGroup()
+            .luminanceToAlpha()
+        )
+    }
 }
