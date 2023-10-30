@@ -23,21 +23,25 @@ import WeatherKit
                 return try await WeatherService.shared.weather(for:.init(latitude: 37.27807821976637, longitude: 127.15216520791188))
             }).value
             
-            model = createForeCastInfo()
+            model = createForecastInfo()
         } catch{
             fatalError("\(error)")
         }
     }
     
-    func createForeCastInfo() -> ForecastInfo?{
+    func createForecastInfo() -> ForecastInfo?{
         guard let weather else {
             print("no weatherService")
             return nil
         }
         
-        return ForecastInfo(currTemperature: weather.currentWeather.temperature, currSymbol: weather.currentWeather.symbolName+".fill", currCondition: weather.currentWeather.condition, createForecastInfo: { time in
-            ForecastInfo.WeatherInfo(id: time, date: weather.hourlyForecast[time].date, condition: weather.hourlyForecast[time].condition, temp: weather.hourlyForecast[time].temperature, symbolName: weather.hourlyForecast[time].symbolName+".fill")
+        return ForecastInfo(currTemperature: weather.currentWeather.temperature, currSymbol: weather.currentWeather.symbolName, currCondition: weather.currentWeather.condition, createForecastInfo: { time in
+            ForecastInfo.WeatherInfo(id: time, date: weather.hourlyForecast[time].date, condition: weather.hourlyForecast[time].condition, temp: weather.hourlyForecast[time].temperature, symbolName: weather.hourlyForecast[time].symbolName)
         })
+    }
+    
+    func updateForecastInfo() {
+        model = createForecastInfo()
     }
     
     var currSymbolName: String{
@@ -56,13 +60,13 @@ import WeatherKit
         model?.hourlyWeather ?? Array<ForecastInfo.WeatherInfo>()
     }
     
-    var startTime: Int = 17{
+    var startTime: Int = 9{
         willSet{
             objectWillChange.send()
         }
     }
     
-    var endTime: Int = 19{
+    var endTime: Int = 10{
         willSet{
             objectWillChange.send()
         }

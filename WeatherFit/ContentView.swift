@@ -12,6 +12,7 @@ import CoreLocation
 struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
     @State private var scrollViewSize: CGSize = .zero
+    @Environment(\.scenePhase) var scenePhase
 //    @State var location = ""
     
     var body: some View {
@@ -27,7 +28,7 @@ struct ContentView: View {
             
             VStack{
                 Text("외출시 평균 기온")
-                Text("\(viewModel.startTime) ~ \(viewModel.endTime)")
+//                Text("\(viewModel.startTime) ~ \(viewModel.endTime)")
                 Text("\(viewModel.avgTemp)")
             }
             .padding(.vertical)
@@ -40,7 +41,12 @@ struct ContentView: View {
                 })
             }
             .padding(.horizontal)
-            .frame(height: 70)
+            .frame(height: 100)
+            .onChange(of: scenePhase){
+                if scenePhase == .inactive{
+                    viewModel.updateForecastInfo()
+                }
+            }
             
             Spacer()
             Text(viewModel.recommendFit)
