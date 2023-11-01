@@ -16,23 +16,35 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            VStack{
-                Text("현재 기온")
-                Text(("\(viewModel.currTemp)"))
-                    .font(.largeTitle)
-                Image(systemName: viewModel.currSymbolName)
-                    .font(.title)
+            HStack{
+                VStack{
+                    Text("현재 기온")
+                    HStack{
+                        Image(systemName: viewModel.currSymbolName)
+                        Text(("\(viewModel.currTemp)"))
+                    }
+                }
+                Spacer()
+                VStack{
+                    Text("외출 시간")
+                    HStack{
+                        Text("\(viewModel.startTime)")
+                        Text("~")
+                        Text("\(viewModel.endTime)")
+                    }
+                }
             }
+            .padding(.horizontal)
             
             VStack{
-                Text("외출시 평균 기온")
-//                Text("\(viewModel.startTime) ~ \(viewModel.endTime)")
+                Text(viewModel.currAddress)
+                    .font(.largeTitle)
+                Text("외출 시 평균 기온")
                 Text("\(viewModel.avgTemp)")
+                    .font(.largeTitle)
             }
             .padding(.vertical)
-            
-            ScrollView(.horizontal, showsIndicators: true){
+            ScrollView(.horizontal, showsIndicators: false){
                 LazyHStack(alignment: .center, spacing: 24, content: {
                     ForEach(viewModel.hourlyWeatherInfo) { info in
                         WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbol: info.symbolName)
