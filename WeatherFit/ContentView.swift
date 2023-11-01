@@ -13,7 +13,6 @@ struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
     @State private var scrollViewSize: CGSize = .zero
     @Environment(\.scenePhase) var scenePhase
-//    @State var location = ""
     
     var body: some View {
         VStack {
