@@ -7,10 +7,12 @@
 
 import Foundation
 import WeatherKit
+import CoreLocation
 
 @MainActor class WeatherFitManager: ObservableObject{
     var weather: Weather?
     @Published var model: ForecastInfo?
+    @Published var locationManager = LocationManager()
     
     private let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
     private let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
@@ -20,7 +22,8 @@ import WeatherKit
     func getWeather() async{
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
-                return try await WeatherService.shared.weather(for:.init(latitude: 37.27807821976637, longitude: 127.15216520791188))
+                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation?.coordinate.latitude ?? 37.27807821976637, longitude: self.locationManager.lastLocation?.coordinate.longitude ?? 127.15216520791188))
+//                return try await WeatherService.shared.weather(for:.init(latitude: , longitude: 127.15216520791188))
             }).value
             
             model = createForecastInfo()
@@ -40,8 +43,8 @@ import WeatherKit
         })
     }
     
-    func updateForecastInfo() {
-        model = createForecastInfo()
+    var currAddress: String{
+        locationManager.userAddress
     }
     
     var currSymbolName: String{
