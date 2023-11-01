@@ -63,14 +63,16 @@ import CoreLocation
         model?.hourlyWeather ?? Array<ForecastInfo.WeatherInfo>()
     }
     
-    var startTime: Int = 9{
+    var startTime: Int = UserDefaults.standard.integer(forKey: "startTime"){
         willSet{
+            UserDefaults.standard.set(newValue, forKey: "startTime")
             objectWillChange.send()
         }
     }
     
-    var endTime: Int = 10{
+    var endTime: Int = UserDefaults.standard.integer(forKey: "endTime"){
         willSet{
+            UserDefaults.standard.set(newValue, forKey: "endTime")
             objectWillChange.send()
         }
     }
