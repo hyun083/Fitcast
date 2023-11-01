@@ -14,10 +14,11 @@ import CoreLocation
     @Published var model: ForecastInfo?
     @Published var locationManager = LocationManager()
     
-    private let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
-    private let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
-    private let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
-    private let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
+    private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
+    private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
+    private static let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
+    private static let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
+    private static let closet = [winter[0], winter[1], autumn[0], autumn[1], spring[0], spring[1], summer[0], summer[1]]
     
     func getWeather() async{
         do{
@@ -106,21 +107,21 @@ import CoreLocation
         get{
             var res = String()
             if avgTemp <= 4{
-                res = winter[0]
+                res = WeatherFitManager.winter[0]
             }else if avgTemp <= 8{
-                res =  winter[1]
+                res =  WeatherFitManager.winter[1]
             }else if avgTemp <= 11{
-                res =  autumn[0]
+                res =  WeatherFitManager.autumn[0]
             }else if avgTemp <= 16{
-                res =  autumn[1]
+                res =  WeatherFitManager.autumn[1]
             }else if avgTemp <= 19{
-                res =  spring[0]
+                res =  WeatherFitManager.spring[0]
             }else if avgTemp <= 22{
-                res =  spring[1]
+                res =  WeatherFitManager.spring[1]
             }else if avgTemp <= 27{
-                res =  summer[0]
+                res =  WeatherFitManager.summer[0]
             }else{
-                res =  summer[1]
+                res =  WeatherFitManager.summer[1]
             }
             return res
         }
