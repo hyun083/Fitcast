@@ -41,11 +41,6 @@ struct ContentView: View {
             }
             .padding(.horizontal)
             .frame(height: 100)
-            .onChange(of: scenePhase){
-                if scenePhase == .inactive{
-                    viewModel.updateForecastInfo()
-                }
-            }
             
             Spacer()
             Text(viewModel.recommendFit)
@@ -57,6 +52,11 @@ struct ContentView: View {
         }
         .task{
             await viewModel.getWeather()
+        }
+        .onChange(of: scenePhase){
+            if scenePhase == .inactive{
+                Task{ await viewModel.getWeather() }
+            }
         }
     }
 }
