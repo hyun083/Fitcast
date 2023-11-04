@@ -16,45 +16,47 @@ struct ContentView: View {
     @State var recommendFit:Int?
     
     var body: some View {
-        VStack {
-            HStack{
-                VStack{
-                    Text("현재 기온")
-                    HStack{
-                        Image(systemName: viewModel.currSymbolName)
-                        Text(("\(viewModel.currTemp)"))
+        ZStack{
+            AngularGradient.init(gradient: Gradient(colors: [Color.blue, .teal]), center: .topLeading, angle: .degrees(210+45)).ignoresSafeArea(.all)
+            VStack {
+                HStack{
+                    VStack{
+                        Text("현재 기온")
+                        HStack{
+                            Image(systemName: viewModel.currSymbolName)
+                            Text(("\(viewModel.currTemp)º"))
+                        }
+                    }
+                    Spacer()
+                    VStack{
+                        Text("외출 시간")
+                        HStack{
+                            Text("\(viewModel.startTime)")
+                            Text("~")
+                            Text("\(viewModel.endTime)")
+                        }
                     }
                 }
-                Spacer()
+                .padding(.horizontal)
+                
                 VStack{
-                    Text("외출 시간")
-                    HStack{
-                        Text("\(viewModel.startTime)")
-                        Text("~")
-                        Text("\(viewModel.endTime)")
-                    }
+                    Text(viewModel.currAddress)
+                        .font(.largeTitle)
+                    Text("외출 시 평균 기온")
+                    Text("\(viewModel.avgTemp)º")
+                        .font(.largeTitle)
                 }
-            }
-            .padding(.horizontal)
-            
-            VStack{
-                Text(viewModel.currAddress)
-                    .font(.largeTitle)
-                Text("외출 시 평균 기온")
-                Text("\(viewModel.avgTemp)")
-                    .font(.largeTitle)
-            }
-            .padding(.vertical)
-            ScrollView(.horizontal, showsIndicators: false){
-                LazyHStack(alignment: .center, spacing: 24, content: {
-                    ForEach(viewModel.hourlyWeatherInfo) { info in
-                        WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbol: info.symbolName)
-                    }
-                })
-            }
-            .padding(.horizontal)
-            .frame(height: 100)
-            
+                .padding(.vertical)
+                ScrollView(.horizontal, showsIndicators: false){
+                    LazyHStack(alignment: .center, spacing: 24, content: {
+                        ForEach(viewModel.hourlyWeatherInfo) { info in
+                            WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbol: info.symbolName)
+                        }
+                    })
+                }
+                .padding(.horizontal)
+                .frame(height: 100)
+                
                 GeometryReader { geo in
                     ScrollView(.horizontal, showsIndicators: true){
                         HStack(spacing:0){
@@ -71,14 +73,14 @@ struct ContentView: View {
                     recommendFit = viewModel.recommendFit
                 })
                 
-            HStack{
-                timePicker(selectedTime: $viewModel.startTime)
-                timePicker(selectedTime: $viewModel.endTime)
+                HStack{
+                    timePicker(selectedTime: $viewModel.startTime)
+                    timePicker(selectedTime: $viewModel.endTime)
+                }
             }
-        }
-        .task{
-            await viewModel.getWeather()
-        }
+            .task{
+                await viewModel.getWeather()
+            }
             .onChange(of: scenePhase){
                 if scenePhase == .inactive{
                     Task{
@@ -118,7 +120,7 @@ struct WeatherView: View{
                     .inverseMask(Image(systemName: symbol+".fill"))
             }
             .font(.title)
-            Text("\(Int(temp.value.rounded()))")
+            Text("\(Int(temp.value.rounded()))º")
         }
     }
 }
