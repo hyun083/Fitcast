@@ -13,6 +13,7 @@ struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
     @State private var scrollViewSize: CGSize = .zero
     @Environment(\.scenePhase) var scenePhase
+    @State var recommendFit:Int?
     
     var body: some View {
         VStack {
@@ -54,9 +55,22 @@ struct ContentView: View {
             .padding(.horizontal)
             .frame(height: 100)
             
-            Spacer()
-            Text(viewModel.recommendFit)
-            Spacer()
+                GeometryReader { geo in
+                    ScrollView(.horizontal, showsIndicators: true){
+                        HStack(spacing:0){
+                            ForEach(viewModel.closet.indices, id: \.self) { idx in
+                                ClosetView(tempRange: viewModel.tempRange[idx], recommendFit: viewModel.closet[idx])
+                                    .frame(width: geo.size.width, height: geo.size.height)
+                            }
+                        }
+                    }
+                    .scrollTargetBehavior(.paging)
+                    .scrollPosition(id: $recommendFit)
+                }
+                .onChange(of: viewModel.avgTemp, {
+                    recommendFit = viewModel.recommendFit
+                })
+                
             HStack{
                 timePicker(selectedTime: $viewModel.startTime)
                 timePicker(selectedTime: $viewModel.endTime)
@@ -106,11 +120,16 @@ struct WeatherView: View{
 }
 
 struct ClosetView: View{
-    
+    var tempRange = "기온 범위"
+    var recommendFit = "추천 의상"
     var body: some View{
-        VStack{
-            
+        VStack(alignment:.leading){
+            Text(tempRange)
+            Text(recommendFit)
+                .font(.title2)
         }
+        .padding(.horizontal)
+        .shadow(radius: 7, y:9)
     }
 }
 
