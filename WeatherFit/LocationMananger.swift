@@ -48,6 +48,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         lastLocation = location
         print(#function, location)
         getUseraddress()
+        locationManager.stopUpdatingLocation()
     }
     
     func getUseraddress(){
@@ -65,7 +66,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 //도시 ex)제주시, 서귀포시...
                 if let area: String = address.last?.locality{
                     self.userAddress = area
-                    print("last location:",area)
                 }
                 //읍면동
 //                if let subArea: String = address.last?.subLocality{

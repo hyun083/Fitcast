@@ -79,9 +79,13 @@ struct ContentView: View {
         .task{
             await viewModel.getWeather()
         }
-        .onChange(of: scenePhase){
-            if scenePhase == .inactive{
-                Task{ await viewModel.getWeather() }
+            .onChange(of: scenePhase){
+                if scenePhase == .inactive{
+                    Task{
+                        viewModel.updateLocation()
+                        await viewModel.getWeather()
+                    }
+                }
             }
         }
     }

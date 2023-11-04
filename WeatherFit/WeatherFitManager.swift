@@ -25,13 +25,15 @@ import CoreLocation
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
                 return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation?.coordinate.latitude ?? 37.27807821976637, longitude: self.locationManager.lastLocation?.coordinate.longitude ?? 127.15216520791188))
-//                return try await WeatherService.shared.weather(for:.init(latitude: , longitude: 127.15216520791188))
             }).value
-            
             model = createForecastInfo()
         } catch{
             fatalError("\(error)")
         }
+    }
+    
+    func updateLocation(){
+        self.locationManager = LocationManager()
     }
     
     func createForecastInfo() -> ForecastInfo?{
