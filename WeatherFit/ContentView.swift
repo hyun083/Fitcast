@@ -14,10 +14,11 @@ struct ContentView: View {
     @State private var scrollViewSize: CGSize = .zero
     @Environment(\.scenePhase) var scenePhase
     @State var recommendFit:Int?
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack{
-            AngularGradient.init(gradient: Gradient(colors: [Color.blue, .teal]), center: .topLeading, angle: .degrees(210+45)).ignoresSafeArea(.all)
+            AngularGradient.init(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black, .gray]), center: .topLeading, angle: .degrees(180+55)).ignoresSafeArea(.all)
             VStack {
                 HStack{
                     VStack{
