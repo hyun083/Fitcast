@@ -50,7 +50,7 @@ struct ContentView: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     LazyHStack(alignment: .center, spacing: 24, content: {
                         ForEach(viewModel.hourlyWeatherInfo) { info in
-                            WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbol: info.symbolName)
+                            WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
                         }
                     })
                 }
@@ -97,14 +97,13 @@ struct WeatherView: View{
     var date: Date
     var condition: WeatherCondition
     var temp: Measurement<UnitTemperature>
-    var symbol: String
+    var symbolName: String
     
     var body: some View{
         VStack{
             Text("\(Calendar.current.component(.hour, from: date))")
             ZStack{
-                // the darker inset image
-                Image(systemName: symbol+".fill")
+                Image(systemName: symbolName)
                     .renderingMode(.original)
                 
                 // black inner shadow
@@ -170,5 +169,12 @@ extension View {
             .compositingGroup()
             .luminanceToAlpha()
         )
+    }
+}
+
+extension String{
+    func safeSymbolName() -> String{
+        let filledSymbolName = self+".fill"
+        return UIImage(systemName: filledSymbolName) == nil ? self : filledSymbolName
     }
 }
