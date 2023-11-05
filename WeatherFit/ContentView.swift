@@ -32,9 +32,9 @@ struct ContentView: View {
                     VStack{
                         Text("외출 시간")
                         HStack{
-                            Text("\(viewModel.startTime)")
+                            Text("\(viewModel.startTime)시")
                             Text("~")
-                            Text("\(viewModel.endTime)")
+                            Text("\(viewModel.endTime)시")
                         }
                     }
                 }
@@ -48,8 +48,10 @@ struct ContentView: View {
                         .font(.largeTitle)
                 }
                 .padding(.vertical)
+                .shadow(radius: 1, y:1.3)
+                
                 ScrollView(.horizontal, showsIndicators: false){
-                    LazyHStack(alignment: .center, spacing: 24, content: {
+                    LazyHStack(alignment: .center, spacing: 27, content: {
                         ForEach(viewModel.hourlyWeatherInfo) { info in
                             WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
                         }
@@ -91,6 +93,7 @@ struct ContentView: View {
                 }
             }
         }
+        .foregroundStyle(.white)
     }
 }
 
@@ -102,22 +105,14 @@ struct WeatherView: View{
     
     var body: some View{
         VStack{
-            Text("\(Calendar.current.component(.hour, from: date))")
+            Text("\(Calendar.current.component(.hour, from: date))시")
             ZStack{
                 Image(systemName: symbolName)
                     .renderingMode(.original)
-                
-                // black inner shadow
+                    .shadow(radius: 1, y:1.3)
+
                 Rectangle()
-                    .inverseMask(Image(systemName: symbol+".fill"))
-                    .shadow(color: Color.gray, radius: 1, x: 0, y: 1)
-                    .mask(Image(systemName: symbol+".fill"))
-                    .clipped()
-                
-                // white bottom edges
-                Image(systemName: symbol+".fill")
-                    .shadow(color: Color.white, radius: 1, x: 0, y: 1.3)
-                    .inverseMask(Image(systemName: symbol+".fill"))
+                    .foregroundStyle(.clear)
             }
             .font(.title)
             Text("\(Int(temp.value.rounded()))º")
@@ -126,8 +121,9 @@ struct WeatherView: View{
 }
 
 struct ClosetView: View{
-    var tempRange = "기온 범위"
-    var recommendFit = "추천 의상"
+    var tempRange: String
+    var recommendFit: String
+    
     var body: some View{
         VStack(alignment:.leading){
             Text(tempRange)
@@ -135,7 +131,7 @@ struct ClosetView: View{
                 .font(.title2)
         }
         .padding(.horizontal)
-        .shadow(radius: 7, y:9)
+        .shadow(radius: 1, y:1.3)
     }
 }
 
@@ -153,6 +149,7 @@ struct timePicker: View{
                 }
             })
             .pickerStyle(.wheel)
+            .foregroundStyle(.white)
         }
     }
 }
