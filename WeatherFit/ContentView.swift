@@ -11,14 +11,14 @@ import CoreLocation
 
 struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
-    @State private var scrollViewSize: CGSize = .zero
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
+    @State private var scrollViewSize: CGSize = .zero
     @State var closetPosition: ForecastInfo.Clothes.ID?
     
     var body: some View {
         ZStack{
-            AngularGradient.init(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black, .gray]), center: .topLeading, angle: .degrees(180+55)).ignoresSafeArea(.all)
+            AngularGradient.init(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,.gray]), center: .topLeading, angle: .degrees(180+55)).ignoresSafeArea(.all)
             VStack {
                 HStack{
                     VStack{
