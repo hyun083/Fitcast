@@ -13,8 +13,8 @@ struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
     @State private var scrollViewSize: CGSize = .zero
     @Environment(\.scenePhase) var scenePhase
-    @State var recommendFit:Int?
     @Environment(\.colorScheme) var colorScheme
+    @State var closetPosition: ForecastInfo.Clothes.ID?
     
     var body: some View {
         ZStack{
@@ -62,18 +62,19 @@ struct ContentView: View {
                 
                 GeometryReader { geo in
                     ScrollView(.horizontal, showsIndicators: true){
-                        HStack(spacing:0){
-                            ForEach(viewModel.closet.indices, id: \.self) { idx in
-                                ClosetView(tempRange: viewModel.tempRange[idx], recommendFit: viewModel.closet[idx])
+                        LazyHStack(spacing:0){
+                            ForEach(viewModel.closet, id: \.self.id) { closet in
+                                ClosetView(tempRange: closet.tempRange, recommendFit: closet.recommendFit)
                                     .frame(width: geo.size.width, height: geo.size.height)
                             }
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollTargetBehavior(.paging)
-                    .scrollPosition(id: $recommendFit)
+                    .scrollTargetBehavior(.viewAligned)
+                    .scrollPosition(id: $closetPosition)
                 }
                 .onChange(of: viewModel.avgTemp, {
-                    recommendFit = viewModel.recommendFit
+                    closetPosition = viewModel.recommendFitPosition
                 })
                 
                 HStack{

@@ -18,8 +18,8 @@ import CoreLocation
     private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
     private static let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
     private static let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
-    let closet = [winter[0], winter[1], autumn[0], autumn[1], spring[0], spring[1], summer[0], summer[1]]
-    let tempRange = ["~ 4º","5 ~ 8º","9 ~ 11º","12 ~ 16º","17 ~ 19º","20 ~ 22º","23 ~ 27º","28º ~"]
+    private static let seasons = winter + autumn + spring + summer
+    private static let tempRange = ["~ 4º","5 ~ 8º","9 ~ 11º","12 ~ 16º","17 ~ 19º","20 ~ 22º","23 ~ 27º","28º ~"]
     
     func getWeather() async{
         do{
@@ -44,7 +44,13 @@ import CoreLocation
         
         return ForecastInfo(currTemperature: weather.currentWeather.temperature, currSymbol: weather.currentWeather.symbolName, currCondition: weather.currentWeather.condition, createForecastInfo: { time in
             ForecastInfo.WeatherInfo(id: time, date: weather.hourlyForecast[time].date, condition: weather.hourlyForecast[time].condition, temp: weather.hourlyForecast[time].temperature, symbolName: weather.hourlyForecast[time].symbolName)
+        }, createCloset: { idx in
+            ForecastInfo.Clothes(id: idx, tempRange: WeatherFitManager.tempRange[idx], recommendFit: WeatherFitManager.seasons[idx])
         })
+    }
+    
+    var closet: [ForecastInfo.Clothes]{
+        model?.closet ?? [ForecastInfo.Clothes]()
     }
     
     var currAddress: String{
@@ -106,27 +112,25 @@ import CoreLocation
         }
     }
     
-    var recommendFit: Int{
+    var recommendFitPosition: ForecastInfo.Clothes.ID{
         get{
-            var res:Int
             if avgTemp <= 4{
-                res = 0
+                return 0
             }else if avgTemp <= 8{
-                res = 1
+                return 1
             }else if avgTemp <= 11{
-                res = 2
+                return 2
             }else if avgTemp <= 16{
-                res = 3
+                return 3
             }else if avgTemp <= 19{
-                res = 4
+                return 4
             }else if avgTemp <= 22{
-                res = 5
+                return 5
             }else if avgTemp <= 27{
-                res = 6
+                return 6
             }else{
-                res = 7
+                return 7
             }
-            return res
         }
         set{
             objectWillChange.send()
