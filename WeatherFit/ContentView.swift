@@ -76,7 +76,9 @@ struct ContentView: View {
                 .onChange(of: viewModel.avgTemp, {
                     closetPosition = viewModel.recommendFitPosition
                 })
-                
+                .onChange(of: viewModel.startTime + viewModel.endTime, {
+                    closetPosition = viewModel.recommendFitPosition
+                })
                 HStack{
                     timePicker(selectedTime: $viewModel.startTime)
                     timePicker(selectedTime: $viewModel.endTime)
