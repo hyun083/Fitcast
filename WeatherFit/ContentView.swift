@@ -47,7 +47,6 @@ struct ContentView: View {
                     Text("\(viewModel.avgTemp)º")
                         .font(.largeTitle)
                 }
-                .padding(.vertical)
                 .shadow(radius: 1, y:1.3)
                 
                 ScrollView(.horizontal, showsIndicators: false){
