@@ -51,14 +51,20 @@ struct ContentView: View {
                 .shadow(radius: 1, y:1.3)
                 
                 ScrollView(.horizontal, showsIndicators: false){
-                    LazyHStack(alignment: .center, spacing: 27, content: {
-                        ForEach(viewModel.hourlyWeatherInfo) { info in
-                            WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
-                        }
-                    })
+                    ZStack{
+                        Color.white
+                            .blur(radius: 350)
+                        LazyHStack(alignment: .center, spacing: 27, content: {
+                            ForEach(viewModel.hourlyWeatherInfo) { info in
+                                WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
+                            }
+                        })
+                    }
+                    .padding(.all)
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal)
-                .frame(height: 100)
+                .frame(height: 150)
                 
                 GeometryReader { geo in
                     ScrollView(.horizontal, showsIndicators: false){
