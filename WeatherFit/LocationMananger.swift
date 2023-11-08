@@ -53,7 +53,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func getUseraddress(){
         let defaultLocation = CLLocation(latitude: 37.27807821976637, longitude: 127.15216520791188)
-        let locale = Locale(identifier: "ko_KR")
+        let locale = Locale(identifier: UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? "ko_KR")
         let geocoder = CLGeocoder()
         
         //지오코더 사용 국가체계에 맞는 주소정보를 반환해준다.
