@@ -54,7 +54,7 @@ import CoreLocation
     }
     
     var currAddress: String{
-        locationManager.userAddress
+        locationManager.userAddress ?? "--"
     }
     
     var currSymbolName: String{

@@ -13,7 +13,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private var locationStatus: CLAuthorizationStatus?
     private (set) var lastLocation: CLLocation?
-    private (set) var userAddress: String = "현재 위치"
+    private (set) var userAddress: String?
 
     override init() {
         super.init()
