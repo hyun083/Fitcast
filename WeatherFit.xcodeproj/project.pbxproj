@@ -26,6 +26,7 @@
 		D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitManager.swift; sourceTree = "<group>"; };
 		D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInfo.swift; sourceTree = "<group>"; };
 		D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMananger.swift; sourceTree = "<group>"; };
+		D2F345A72AFA38D800CBE2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 		D20640C32ADE85A400CACFC6 /* WeatherFit */ = {
 			isa = PBXGroup;
 			children = (
+				D2F345A72AFA38D800CBE2F4 /* Info.plist */,
 				D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */,
 				D20640C42ADE85A400CACFC6 /* WeatherFitApp.swift */,
 				D20640C62ADE85A400CACFC6 /* ContentView.swift */,
@@ -290,7 +292,8 @@
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치 권한 허용 메세지";
+				INFOPLIST_FILE = WeatherFit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -325,7 +328,8 @@
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치 권한 허용 메세지";
+				INFOPLIST_FILE = WeatherFit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
