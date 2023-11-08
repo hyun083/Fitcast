@@ -175,10 +175,10 @@ struct timePicker: View{
             Picker("time picker", selection: $selectedTime, content:{
                 ForEach(idx, id:\.self){ idx in
                     Text(times[idx])
+                        .foregroundStyle(.white)
                 }
             })
             .pickerStyle(.wheel)
-            .foregroundStyle(.white)
         }
     }
 }
