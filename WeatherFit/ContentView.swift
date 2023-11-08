@@ -61,23 +61,28 @@ struct ContentView: View {
                 .frame(height: 100)
                 
                 GeometryReader { geo in
-                    ScrollView(.horizontal, showsIndicators: true){
-                        LazyHStack(spacing:0){
+                    ScrollView(.horizontal, showsIndicators: false){
+                        LazyHStack(){
                             ForEach(viewModel.closet, id: \.self.id) { closet in
                                 ClosetView(tempRange: closet.tempRange, recommendFit: closet.recommendFit)
-                                    .frame(width: geo.size.width, height: geo.size.height)
                             }
                         }
                         .scrollTargetLayout()
                     }
                     .scrollTargetBehavior(.viewAligned)
                     .scrollPosition(id: $closetPosition)
+                    .safeAreaPadding(.all)
+                    .scrollClipDisabled()
                 }
                 .onChange(of: viewModel.avgTemp, {
-                    closetPosition = viewModel.recommendFitPosition
+                    withAnimation{
+                        closetPosition = viewModel.recommendFitPosition
+                    }
                 })
                 .onChange(of: viewModel.startTime + viewModel.endTime, {
-                    closetPosition = viewModel.recommendFitPosition
+                    withAnimation{
+                        closetPosition = viewModel.recommendFitPosition
+                    }
                 })
                 HStack{
                     timePicker(selectedTime: $viewModel.startTime)
@@ -128,13 +133,28 @@ struct ClosetView: View{
     var recommendFit: String
     
     var body: some View{
-        VStack(alignment:.leading){
-            Text(tempRange)
-            Text(recommendFit)
-                .font(.title2)
+        ZStack{
+            Color.white
+                .blur(radius: 350)
+            VStack(alignment:.leading){
+                Text(tempRange)
+                Text(recommendFit)
+                    .font(.title2)
+            }
+            .padding(.horizontal)
+            .shadow(radius: 1, y:1.3)
         }
-        .padding(.horizontal)
-        .shadow(radius: 1, y:1.3)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 10.0)
+        .scrollTransition(topLeading: .interactive,
+                          bottomTrailing: .interactive,
+                          axis: .horizontal,
+                          transition: {effect, phase in
+            effect
+                .scaleEffect(1-abs(phase.value))
+                .opacity(1-abs(phase.value))
+                .rotation3DEffect(.degrees(phase.value * 90), axis: (0.001, 1, 0.001))
+        })
     }
 }
 
