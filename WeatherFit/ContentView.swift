@@ -39,6 +39,7 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal)
+                .font(.subheadline)
                 
                 VStack{
                     Text(viewModel.currAddress)
