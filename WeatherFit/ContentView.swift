@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            AngularGradient.init(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,.gray]), center: .topLeading, angle: .degrees(180+55)).ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,.blue]), startPoint: .top, endPoint: .bottomLeading).ignoresSafeArea(.all)
             VStack {
                 HStack{
                     VStack{
