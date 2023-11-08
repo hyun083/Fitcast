@@ -18,8 +18,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
+            //MARK: - GradientBackground
             LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,.blue]), startPoint: .top, endPoint: .bottomLeading).ignoresSafeArea(.all)
+            
             VStack {
+                //MARK: - CurrTemp and UserTime
                 HStack{
                     VStack{
                         Text("현재 기온")
@@ -41,6 +44,7 @@ struct ContentView: View {
                 .padding(.horizontal)
                 .font(.subheadline)
                 
+                //MARK: - AvgTemp
                 VStack{
                     Text(viewModel.currAddress)
                         .font(.largeTitle)
@@ -50,6 +54,7 @@ struct ContentView: View {
                 }
                 .shadow(radius: 1, y:1.3)
                 
+                //MARK: - HourlyWeather
                 ScrollView(.horizontal, showsIndicators: false){
                     ZStack{
                         Color.white
@@ -66,6 +71,7 @@ struct ContentView: View {
                 .padding(.horizontal)
                 .frame(height: 150)
                 
+                //MARK: - Closet
                 GeometryReader { geo in
                     ScrollView(.horizontal, showsIndicators: false){
                         LazyHStack(){
@@ -90,6 +96,8 @@ struct ContentView: View {
                         closetPosition = viewModel.recommendFitPosition
                     }
                 })
+                
+                //MARK: - timePicker
                 HStack{
                     timePicker(selectedTime: $viewModel.startTime)
                     timePicker(selectedTime: $viewModel.endTime)
@@ -111,6 +119,7 @@ struct ContentView: View {
     }
 }
 
+//MARK: - WeatherView
 struct WeatherView: View{
     var date: Date
     var condition: WeatherCondition
@@ -134,6 +143,7 @@ struct WeatherView: View{
     }
 }
 
+//MARK: - ClosetView
 struct ClosetView: View{
     var tempRange: String
     var recommendFit: String
@@ -164,6 +174,7 @@ struct ClosetView: View{
     }
 }
 
+//MARK: - TimePickerView
 struct timePicker: View{
     @Binding var selectedTime:Int
     let idx = [Int](0...23)
@@ -183,10 +194,12 @@ struct timePicker: View{
     }
 }
 
+//MARK: - PreView
 #Preview {
     ContentView()
 }
 
+//MARK: - extensions
 extension View {
     // https://www.raywenderlich.com/7589178-how-to-create-a-neumorphic-design-with-swiftui
     func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
