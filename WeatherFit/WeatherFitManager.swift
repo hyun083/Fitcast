@@ -24,7 +24,7 @@ import CoreLocation
     func getWeather() async{
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
-                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation?.coordinate.latitude ?? 37.27807821976637, longitude: self.locationManager.lastLocation?.coordinate.longitude ?? 127.15216520791188))
+                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation?.coordinate.latitude ?? 37.27807821976637,longitude: self.locationManager.lastLocation?.coordinate.longitude ?? 127.15216520791188))
             }).value
             model = createForecastInfo()
         } catch{
@@ -77,15 +77,16 @@ import CoreLocation
         model?.now ?? Int(Calendar.current.component(.hour, from: Date()))
     }
     
+    var startTime: Int = UserDefaults.shared.integer(forKey: "startTime"){
         willSet{
-            UserDefaults.standard.set(newValue, forKey: "startTime")
+            UserDefaults.shared.set(newValue, forKey: "startTime")
             objectWillChange.send()
         }
     }
     
-    var endTime: Int = UserDefaults.standard.integer(forKey: "endTime"){
+    var endTime: Int = UserDefaults.shared.integer(forKey: "endTime"){
         willSet{
-            UserDefaults.standard.set(newValue, forKey: "endTime")
+            UserDefaults.shared.set(newValue, forKey: "endTime")
             objectWillChange.send()
         }
     }
@@ -102,41 +103,53 @@ import CoreLocation
             upper += upper<now ? 24:0
             upper += upper<lower ? 24:0
             print(lower,upper)
-            var res = [Int]()
+            var tmp = [Int]()
             
             for info in hourlyForecast{
                 if (lower...upper).contains(info.id-1){
-                    print(info.id, info.date, info.temp.value.rounded())
-                    res.append(Int(info.temp.value.rounded()))
+//                    print(info.id, info.date, info.temp.value.rounded())
+                    tmp.append(Int(info.temp.value.rounded()))
                 }
             }
             
-            return(res.reduce(0, +)/(res.count==0 ? 1:res.count))
+            let res = tmp.reduce(0, +)/(tmp.count==0 ? 1:tmp.count)
+            UserDefaults.standard.set(res, forKey: "avgTemp")
+            return(res)
         }
     }
     
     var recommendFitPosition: ForecastInfo.Clothes.ID{
         get{
+            let idx:Int
             if avgTemp <= 4{
-                return 0
+                idx = 0
             }else if avgTemp <= 8{
-                return 1
+                idx = 1
             }else if avgTemp <= 11{
-                return 2
+                idx = 2
             }else if avgTemp <= 16{
-                return 3
+                idx = 3
             }else if avgTemp <= 19{
-                return 4
+                idx = 4
             }else if avgTemp <= 22{
-                return 5
+                idx = 5
             }else if avgTemp <= 27{
-                return 6
+                idx = 6
             }else{
-                return 7
+                idx = 7
             }
+            UserDefaults.standard.set(WeatherFitManager.seasons[idx], forKey: "recommendFit")
+            return idx
         }
         set{
             objectWillChange.send()
         }
+    }
+}
+
+extension UserDefaults {
+    static var shared: UserDefaults {
+        let appGroupId = "group.Hyun.Dev.WeatherFit"
+        return UserDefaults(suiteName: appGroupId)!
     }
 }

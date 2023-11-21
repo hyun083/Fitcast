@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import WidgetKit
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
@@ -21,6 +22,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     var statusString: String {
@@ -49,6 +51,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         print(#function, location)
         getUseraddress()
         locationManager.stopUpdatingLocation()
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func getUseraddress(){

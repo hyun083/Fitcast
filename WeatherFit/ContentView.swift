@@ -8,6 +8,7 @@
 import SwiftUI
 import WeatherKit
 import CoreLocation
+import WidgetKit
 
 struct ContentView: View {
     @ObservedObject var viewModel = WeatherFitManager()
@@ -109,6 +110,7 @@ struct ContentView: View {
             .onChange(of: scenePhase){
                 if scenePhase == .inactive{
                     Task{
+                        WidgetCenter.shared.reloadAllTimelines()
                         viewModel.updateLocation()
                         await viewModel.getWeather()
                     }

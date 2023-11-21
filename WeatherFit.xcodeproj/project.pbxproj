@@ -11,10 +11,43 @@
 		D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C62ADE85A400CACFC6 /* ContentView.swift */; };
 		D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640C82ADE85A600CACFC6 /* Assets.xcassets */; };
 		D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */; };
+		D23CCDB12B021006009BD5CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; };
+		D23CCDB32B021006009BD5CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
+		D23CCDB62B021006009BD5CD /* weatherFitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */; };
+		D23CCDB82B021006009BD5CD /* weatherFitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */; };
+		D23CCDBA2B021006009BD5CD /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB92B021006009BD5CD /* AppIntent.swift */; };
+		D23CCDBC2B021008009BD5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D23CCDBB2B021008009BD5CD /* Assets.xcassets */; };
+		D23CCDC02B021008009BD5CD /* weatherFitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */; };
 		D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
+		D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
+		D29B815C2B03E618002EF6CF /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
 		D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D23CCDBE2B021008009BD5CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D20640B92ADE85A400CACFC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D23CCDAD2B021006009BD5CD;
+			remoteInfo = weatherFitWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D23CCDC12B021008009BD5CD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D23CCDC02B021008009BD5CD /* weatherFitWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D20640C12ADE85A400CACFC6 /* WeatherFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,6 +56,15 @@
 		D20640C82ADE85A600CACFC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherFit.entitlements; sourceTree = "<group>"; };
+		D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = weatherFitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D23CCDB02B021006009BD5CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		D23CCDB22B021006009BD5CD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherFitWidgetBundle.swift; sourceTree = "<group>"; };
+		D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherFitWidget.swift; sourceTree = "<group>"; };
+		D23CCDB92B021006009BD5CD /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		D23CCDBB2B021008009BD5CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D23CCDBD2B021008009BD5CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D23CCDC52B021797009BD5CD /* weatherFitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weatherFitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitManager.swift; sourceTree = "<group>"; };
 		D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInfo.swift; sourceTree = "<group>"; };
 		D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMananger.swift; sourceTree = "<group>"; };
@@ -37,13 +79,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D23CCDAB2B021006009BD5CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D23CCDB32B021006009BD5CD /* SwiftUI.framework in Frameworks */,
+				D23CCDB12B021006009BD5CD /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		D20640B82ADE85A400CACFC6 = {
 			isa = PBXGroup;
 			children = (
+				D23CCDC52B021797009BD5CD /* weatherFitWidgetExtension.entitlements */,
 				D20640C32ADE85A400CACFC6 /* WeatherFit */,
+				D23CCDB42B021006009BD5CD /* weatherFitWidget */,
+				D23CCDAF2B021006009BD5CD /* Frameworks */,
 				D20640C22ADE85A400CACFC6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				D20640C12ADE85A400CACFC6 /* WeatherFit.app */,
+				D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +135,27 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		D23CCDAF2B021006009BD5CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D23CCDB02B021006009BD5CD /* WidgetKit.framework */,
+				D23CCDB22B021006009BD5CD /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D23CCDB42B021006009BD5CD /* weatherFitWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */,
+				D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */,
+				D23CCDB92B021006009BD5CD /* AppIntent.swift */,
+				D23CCDBB2B021008009BD5CD /* Assets.xcassets */,
+				D23CCDBD2B021008009BD5CD /* Info.plist */,
+			);
+			path = weatherFitWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,15 +166,34 @@
 				D20640BD2ADE85A400CACFC6 /* Sources */,
 				D20640BE2ADE85A400CACFC6 /* Frameworks */,
 				D20640BF2ADE85A400CACFC6 /* Resources */,
+				D23CCDC12B021008009BD5CD /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D23CCDBF2B021008009BD5CD /* PBXTargetDependency */,
 			);
 			name = WeatherFit;
 			productName = WeatherFit;
 			productReference = D20640C12ADE85A400CACFC6 /* WeatherFit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D23CCDC42B021008009BD5CD /* Build configuration list for PBXNativeTarget "weatherFitWidgetExtension" */;
+			buildPhases = (
+				D23CCDAA2B021006009BD5CD /* Sources */,
+				D23CCDAB2B021006009BD5CD /* Frameworks */,
+				D23CCDAC2B021006009BD5CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = weatherFitWidgetExtension;
+			productName = weatherFitWidgetExtension;
+			productReference = D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -112,6 +207,9 @@
 				TargetAttributes = {
 					D20640C02ADE85A400CACFC6 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					D23CCDAD2B021006009BD5CD = {
+						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
@@ -129,6 +227,7 @@
 			projectRoot = "";
 			targets = (
 				D20640C02ADE85A400CACFC6 /* WeatherFit */,
+				D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -140,6 +239,14 @@
 			files = (
 				D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */,
 				D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D23CCDAC2B021006009BD5CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D23CCDBC2B021008009BD5CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +265,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D23CCDAA2B021006009BD5CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D23CCDB82B021006009BD5CD /* weatherFitWidget.swift in Sources */,
+				D29B815C2B03E618002EF6CF /* LocationMananger.swift in Sources */,
+				D23CCDB62B021006009BD5CD /* weatherFitWidgetBundle.swift in Sources */,
+				D23CCDBA2B021006009BD5CD /* AppIntent.swift in Sources */,
+				D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D23CCDBF2B021008009BD5CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */;
+			targetProxy = D23CCDBE2B021008009BD5CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D20640CD2ADE85A600CACFC6 /* Debug */ = {
@@ -283,6 +410,7 @@
 		D20640D02ADE85A600CACFC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeatherFit/WeatherFit.entitlements;
@@ -319,6 +447,7 @@
 		D20640D12ADE85A600CACFC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeatherFit/WeatherFit.entitlements;
@@ -352,6 +481,66 @@
 			};
 			name = Release;
 		};
+		D23CCDC22B021008009BD5CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GY4XTB4R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = weatherFitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = weatherFitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "위치 권한 허용 문구";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "[위젯] 사용자의 위치를 사용합니다.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D23CCDC32B021008009BD5CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GY4XTB4R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = weatherFitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = weatherFitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "위치 권한 허용 문구";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "[위젯] 사용자의 위치를 사용합니다.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -369,6 +558,15 @@
 			buildConfigurations = (
 				D20640D02ADE85A600CACFC6 /* Debug */,
 				D20640D12ADE85A600CACFC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D23CCDC42B021008009BD5CD /* Build configuration list for PBXNativeTarget "weatherFitWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D23CCDC22B021008009BD5CD /* Debug */,
+				D23CCDC32B021008009BD5CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
