@@ -73,7 +73,10 @@ import CoreLocation
         model?.hourlyWeather ?? Array<ForecastInfo.WeatherInfo>()
     }
     
-    var startTime: Int = UserDefaults.standard.integer(forKey: "startTime"){
+    var currHour:Int{
+        model?.now ?? Int(Calendar.current.component(.hour, from: Date()))
+    }
+    
         willSet{
             UserDefaults.standard.set(newValue, forKey: "startTime")
             objectWillChange.send()

@@ -14,6 +14,7 @@ struct ForecastInfo{
     private (set) var currSymbol: String
     private (set) var hourlyWeather: Array<WeatherInfo>
     private (set) var closet: Array<Clothes>
+    private (set) var now: Int
     
     struct WeatherInfo: Identifiable{
         var id: Int
@@ -36,8 +37,8 @@ struct ForecastInfo{
         hourlyWeather = Array<WeatherInfo>()
         closet = Array<Clothes>()
         
-        let now = Int(Calendar.current.component(.hour, from: Date()))+1
-        for time in now..<now+25{
+        self.now = Int(Calendar.current.component(.hour, from: Date()))
+        for time in now+1..<now+26{
             let weatherInfo = createForecastInfo(time)
             hourlyWeather.append(weatherInfo)
         }
