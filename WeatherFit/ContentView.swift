@@ -99,8 +99,8 @@ struct ContentView: View {
                 
                 //MARK: - timePicker
                 HStack{
-                    timePicker(selectedTime: $viewModel.startTime)
-                    timePicker(selectedTime: $viewModel.endTime)
+                    timePicker(selectedTime: $viewModel.startTime, idx: [Int](0...23))
+                    timePicker(selectedTime: $viewModel.endTime, idx: [Int](0...23))
                 }
             }
             .task{
@@ -177,7 +177,7 @@ struct ClosetView: View{
 //MARK: - TimePickerView
 struct timePicker: View{
     @Binding var selectedTime:Int
-    let idx = [Int](0...23)
+    let idx: [Int]
     let times = ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00",
                  "13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
     
