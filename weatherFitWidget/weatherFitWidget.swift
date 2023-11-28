@@ -14,6 +14,12 @@ struct Provider: AppIntentTimelineProvider {
     let locationManager = LocationManager()
     let service = WeatherService()
     
+    private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
+    private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
+    private static let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
+    private static let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
+    private static let seasons = winter + autumn + spring + summer
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), locationManager: locationManager, currTemp: "--", currSymbolName: "cloud.sun.fill")
     }
@@ -50,6 +56,7 @@ struct SimpleEntry: TimelineEntry {
     let locationManager: LocationManager
     var currTemp: String
     var currSymbolName: String
+    var recommandFit: String
     
     var minute : Int{
         Int(Calendar.current.component(.minute, from: date))
@@ -75,12 +82,9 @@ struct weatherFitWidgetEntryView : View {
                     Image(systemName: entry.currSymbolName)
                     Text(entry.currTemp)
                 }
-                HStack{
-                    Text("외출 시간").font(.caption)
-                    Text("\(UserDefaults.shared.integer(forKey: "startTime"))")
-                    Text("-")
-                    Text("\(UserDefaults.shared.integer(forKey: "endTime"))")
-                }
+                Spacer()
+                Text(entry.recommandFit)
+                Spacer()
             }
             .padding(.all)
             .foregroundStyle(.white)
