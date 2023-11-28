@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             //MARK: - GradientBackground
-            LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,.blue]), startPoint: .top, endPoint: .bottomLeading).ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,Color(#colorLiteral(red: 0.1437649727, green: 0.2230264843, blue: 0.3401089311, alpha: 1))]), startPoint: .top, endPoint: .bottomLeading).ignoresSafeArea(.all)
             
             VStack {
                 //MARK: - CurrTemp and UserTime
