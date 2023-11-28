@@ -117,39 +117,4 @@ import CoreLocation
             return(res)
         }
     }
-    
-    var recommendFitPosition: ForecastInfo.Clothes.ID{
-        get{
-            let idx:Int
-            if avgTemp <= 4{
-                idx = 0
-            }else if avgTemp <= 8{
-                idx = 1
-            }else if avgTemp <= 11{
-                idx = 2
-            }else if avgTemp <= 16{
-                idx = 3
-            }else if avgTemp <= 19{
-                idx = 4
-            }else if avgTemp <= 22{
-                idx = 5
-            }else if avgTemp <= 27{
-                idx = 6
-            }else{
-                idx = 7
-            }
-            UserDefaults.standard.set(WeatherFitManager.seasons[idx], forKey: "recommendFit")
-            return idx
-        }
-        set{
-            objectWillChange.send()
-        }
-    }
-}
-
-extension UserDefaults {
-    static var shared: UserDefaults {
-        let appGroupId = "group.Hyun.Dev.WeatherFit"
-        return UserDefaults(suiteName: appGroupId)!
-    }
 }

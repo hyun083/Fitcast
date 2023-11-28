@@ -113,20 +113,6 @@ extension ConfigurationAppIntent {
     }
 }
 
-extension UserDefaults {
-    static var shared: UserDefaults {
-        let appGroupId = "group.Hyun.Dev.WeatherFit"
-        return UserDefaults(suiteName: appGroupId)!
-    }
-}
-
-extension String{
-    func safeSymbolName() -> String{
-        let filledSymbolName = self+".fill"
-        return UIImage(systemName: filledSymbolName) == nil ? self : filledSymbolName
-    }
-}
-
 #Preview(as: .systemSmall) {
     weatherFitWidget()
 } timeline: {

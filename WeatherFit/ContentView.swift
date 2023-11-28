@@ -89,12 +89,12 @@ struct ContentView: View {
                 }
                 .onChange(of: viewModel.avgTemp, {
                     withAnimation{
-                        closetPosition = viewModel.recommendFitPosition
+                        closetPosition = viewModel.avgTemp.position
                     }
                 })
                 .onChange(of: viewModel.startTime + viewModel.endTime, {
                     withAnimation{
-                        closetPosition = viewModel.recommendFitPosition
+                        closetPosition = viewModel.avgTemp.position
                     }
                 })
                 
@@ -214,9 +214,3 @@ extension View {
     }
 }
 
-extension String{
-    func safeSymbolName() -> String{
-        let filledSymbolName = self+".fill"
-        return UIImage(systemName: filledSymbolName) == nil ? self : filledSymbolName
-    }
-}
