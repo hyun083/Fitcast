@@ -23,6 +23,8 @@
 		D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
 		D29B815C2B03E618002EF6CF /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
 		D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
+		D2E15B132B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
+		D2E15B142B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,7 @@
 		D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitManager.swift; sourceTree = "<group>"; };
 		D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInfo.swift; sourceTree = "<group>"; };
 		D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMananger.swift; sourceTree = "<group>"; };
+		D2E15B122B15F349002C609F /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		D2F345A72AFA38D800CBE2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +124,7 @@
 				D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */,
 				D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */,
 				D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */,
+				D2E15B122B15F349002C609F /* extensions.swift */,
 				D20640C82ADE85A600CACFC6 /* Assets.xcassets */,
 				D20640CA2ADE85A600CACFC6 /* Preview Content */,
 			);
@@ -262,6 +266,7 @@
 				D20640C52ADE85A400CACFC6 /* WeatherFitApp.swift in Sources */,
 				D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */,
 				D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */,
+				D2E15B132B15F349002C609F /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +279,7 @@
 				D23CCDB62B021006009BD5CD /* weatherFitWidgetBundle.swift in Sources */,
 				D23CCDBA2B021006009BD5CD /* AppIntent.swift in Sources */,
 				D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */,
+				D2E15B142B15F349002C609F /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +493,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
@@ -504,6 +511,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -517,6 +525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
@@ -534,6 +543,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
