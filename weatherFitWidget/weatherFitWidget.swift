@@ -53,9 +53,9 @@ struct Provider: AppIntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationAppIntent
-    let locationManager: LocationManager
     var currTemp: String
     var currSymbolName: String
+    var currAddress: String
     var recommandFit: String
     
     var minute : Int{
@@ -76,8 +76,7 @@ struct weatherFitWidgetEntryView : View {
             LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,Color(#colorLiteral(red: 0.1437649727, green: 0.2230264843, blue: 0.3401089311, alpha: 1))]), startPoint: .top, endPoint: .bottom)
 
             VStack(alignment: .leading){
-                Text(String(entry.hour) + ":" + String(entry.minute))
-                Text(entry.locationManager.userAddress ?? "--º")
+                Text(entry.currAddress)
                 HStack{
                     Image(systemName: entry.currSymbolName)
                     Text(entry.currTemp)
