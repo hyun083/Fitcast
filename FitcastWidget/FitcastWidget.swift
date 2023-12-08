@@ -24,7 +24,7 @@ struct Provider: AppIntentTimelineProvider {
         SimpleEntry(date: Date(), currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
+    func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
                 for: locationManager.lastLocation ?? CLLocation(latitude: 0, longitude: 0),
@@ -38,7 +38,7 @@ struct Provider: AppIntentTimelineProvider {
         return SimpleEntry(date: Date(), currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
     }
     
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+    func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
                 for: locationManager.lastLocation ?? CLLocation(latitude: 0, longitude: 0),
@@ -48,7 +48,6 @@ struct Provider: AppIntentTimelineProvider {
         
         var entries: [SimpleEntry] = []
         
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
@@ -102,30 +101,18 @@ struct FitcastWidget: Widget {
     let kind: String = "FitcastWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SelectLocationIntent.self, provider: Provider()) { entry in
             FitcastWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .contentMarginsDisabled()
-    }
-}
-
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
+        .supportedFamilies([.systemSmall,.systemMedium])
+        .description("특정 지역의 현재 기상 상태와 추천 옷차림을 표시합니다.")
     }
 }
 
 #Preview(as: .systemSmall) {
     FitcastWidget()
 } timeline: {
-    SimpleEntry(date: Date(), currTemp: "19º", currSymbolName: "cloud.sun.fill", currAddress: "용인", recommandFit: "--")
+    SimpleEntry(date: Date(), currTemp: "19º", currSymbolName: "cloud.sun.fill", currAddress: "용인", recommandFit: "추천 옷차림")
 }
