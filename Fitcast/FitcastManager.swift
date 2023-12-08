@@ -102,12 +102,11 @@ import CoreLocation
             lower += lower<now ? 24:0
             upper += upper<now ? 24:0
             upper += upper<lower ? 24:0
-            print(lower,upper)
+            
             var tmp = [Int]()
             
             for info in hourlyForecast{
                 if (lower...upper).contains(info.id-1){
-//                    print(info.id, info.date, info.temp.value.rounded())
                     tmp.append(Int(info.temp.value.rounded()))
                 }
             }
