@@ -11,7 +11,7 @@ import CoreLocation
 import WidgetKit
 
 struct ContentView: View {
-    @ObservedObject var viewModel = WeatherFitManager()
+    @ObservedObject var viewModel = FitcastManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
     @State private var scrollViewSize: CGSize = .zero
@@ -200,17 +200,3 @@ struct timePicker: View{
 #Preview {
     ContentView()
 }
-
-//MARK: - extensions
-extension View {
-    // https://www.raywenderlich.com/7589178-how-to-create-a-neumorphic-design-with-swiftui
-    func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
-        self.mask(mask
-            .foregroundColor(.black)
-            .background(Color.white)
-            .compositingGroup()
-            .luminanceToAlpha()
-        )
-    }
-}
-

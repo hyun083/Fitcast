@@ -9,7 +9,7 @@ import Foundation
 import WeatherKit
 import CoreLocation
 
-@MainActor class WeatherFitManager: ObservableObject{
+@MainActor class FitcastManager: ObservableObject{
     var weather: Weather?
     @Published private var model: ForecastInfo?
     @Published private var locationManager = LocationManager()
@@ -45,7 +45,7 @@ import CoreLocation
         return ForecastInfo(currTemperature: weather.currentWeather.temperature, currSymbol: weather.currentWeather.symbolName, currCondition: weather.currentWeather.condition, createForecastInfo: { time in
             ForecastInfo.WeatherInfo(id: time, date: weather.hourlyForecast[time].date, condition: weather.hourlyForecast[time].condition, temp: weather.hourlyForecast[time].temperature, symbolName: weather.hourlyForecast[time].symbolName)
         }, createCloset: { idx in
-            ForecastInfo.Clothes(id: idx, tempRange: WeatherFitManager.tempRange[idx], recommendFit: WeatherFitManager.seasons[idx])
+            ForecastInfo.Clothes(id: idx, tempRange: FitcastManager.tempRange[idx], recommendFit: FitcastManager.seasons[idx])
         })
     }
     

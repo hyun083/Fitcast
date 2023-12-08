@@ -21,11 +21,21 @@ struct Provider: AppIntentTimelineProvider {
     private static let seasons = winter + autumn + spring + summer
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), locationManager: locationManager, currTemp: "--", currSymbolName: "cloud.sun.fill")
+        SimpleEntry(date: Date(), currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        return SimpleEntry(date: Date(), configuration: configuration, locationManager: locationManager, currTemp: "--", currSymbolName: "cloud.sun.fill")
+        let currentWeather = await Task.detached(priority: .userInitiated) {
+            let forecast = try? await self.service.weather(
+                for: locationManager.lastLocation ?? CLLocation(latitude: 0, longitude: 0),
+              including: .current)
+            return forecast
+          }.value
+        let address = locationManager.userAddress ?? "--"
+        let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
+        let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
+        
+        return SimpleEntry(date: Date(), currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -42,7 +52,11 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, locationManager: locationManager, currTemp: String(Int(currentWeather?.temperature.value.rounded() ?? 0))+"º", currSymbolName: currentWeather?.symbolName.safeSymbolName() ?? "xmark")
+            let address = locationManager.userAddress ?? "--"
+            let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
+            let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
+            
+            let entry = SimpleEntry(date: entryDate, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
             entries.append(entry)
         }
         
@@ -52,51 +66,44 @@ struct Provider: AppIntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
     var currTemp: String
     var currSymbolName: String
     var currAddress: String
     var recommandFit: String
-    
-    var minute : Int{
-        Int(Calendar.current.component(.minute, from: date))
-    }
-    
-    var hour: Int{
-        Int(Calendar.current.component(.hour, from: date))
-    }
 }
 
-struct weatherFitWidgetEntryView : View {
+struct FitcastWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,Color(#colorLiteral(red: 0.1437649727, green: 0.2230264843, blue: 0.3401089311, alpha: 1))]), startPoint: .top, endPoint: .bottom)
-
-            VStack(alignment: .leading){
-                Text(entry.currAddress)
-                HStack{
-                    Image(systemName: entry.currSymbolName)
-                    Text(entry.currTemp)
+            GeometryReader{ geo in
+                VStack(alignment: .leading){
+                    Text(entry.currAddress)
+                    HStack{
+                        Image(systemName: entry.currSymbolName)
+                            .renderingMode(.original)
+                        Text(entry.currTemp)
+                    }
+                    Spacer()
+                    Text(entry.recommandFit)
+                    Spacer()
                 }
-                Spacer()
-                Text(entry.recommandFit)
-                Spacer()
+                .padding(.all)
+                .foregroundStyle(.white)
             }
-            .padding(.all)
-            .foregroundStyle(.white)
         }
     }
 }
 
-struct weatherFitWidget: Widget {
-    let kind: String = "weatherFitWidget"
+struct FitcastWidget: Widget {
+    let kind: String = "FitcastWidget"
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            weatherFitWidgetEntryView(entry: entry)
+            FitcastWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .contentMarginsDisabled()
@@ -118,7 +125,7 @@ extension ConfigurationAppIntent {
 }
 
 #Preview(as: .systemSmall) {
-    weatherFitWidget()
+    FitcastWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley, locationManager: LocationManager(), currTemp: "-", currSymbolName: "cloud.sun.fill")
+    SimpleEntry(date: Date(), currTemp: "19º", currSymbolName: "cloud.sun.fill", currAddress: "용인", recommandFit: "--")
 }

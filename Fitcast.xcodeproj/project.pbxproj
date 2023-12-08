@@ -7,44 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D20640C52ADE85A400CACFC6 /* WeatherFitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C42ADE85A400CACFC6 /* WeatherFitApp.swift */; };
+		D20640C52ADE85A400CACFC6 /* FitcastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C42ADE85A400CACFC6 /* FitcastApp.swift */; };
 		D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C62ADE85A400CACFC6 /* ContentView.swift */; };
 		D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640C82ADE85A600CACFC6 /* Assets.xcassets */; };
 		D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */; };
-		D23CCDB12B021006009BD5CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; };
-		D23CCDB32B021006009BD5CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
-		D23CCDB62B021006009BD5CD /* weatherFitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */; };
-		D23CCDB82B021006009BD5CD /* weatherFitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */; };
-		D23CCDBA2B021006009BD5CD /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CCDB92B021006009BD5CD /* AppIntent.swift */; };
-		D23CCDBC2B021008009BD5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D23CCDBB2B021008009BD5CD /* Assets.xcassets */; };
-		D23CCDC02B021008009BD5CD /* weatherFitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */; };
+		D28F345B2AEAA75A008BCEE3 /* FitcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */; };
 		D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
-		D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
-		D29B815C2B03E618002EF6CF /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
+		D2C5936E2B234EA90007A2F3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; };
+		D2C5936F2B234EA90007A2F3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
+		D2C593722B234EA90007A2F3 /* FitcastWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593712B234EA90007A2F3 /* FitcastWidgetBundle.swift */; };
+		D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593732B234EA90007A2F3 /* FitcastWidget.swift */; };
+		D2C593762B234EA90007A2F3 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593752B234EA90007A2F3 /* AppIntent.swift */; };
+		D2C593782B234EAB0007A2F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C593772B234EAB0007A2F3 /* Assets.xcassets */; };
+		D2C5937C2B234EAB0007A2F3 /* FitcastWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2C593812B234F260007A2F3 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
+		D2C593822B234F280007A2F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 		D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
 		D2E15B132B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
-		D2E15B142B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D23CCDBE2B021008009BD5CD /* PBXContainerItemProxy */ = {
+		D2C5937A2B234EAB0007A2F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D20640B92ADE85A400CACFC6 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D23CCDAD2B021006009BD5CD;
-			remoteInfo = weatherFitWidgetExtension;
+			remoteGlobalIDString = D2C5936C2B234EA90007A2F3;
+			remoteInfo = FitcastWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D23CCDC12B021008009BD5CD /* Embed Foundation Extensions */ = {
+		D29EB73F2B231A93003D0A94 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D23CCDC02B021008009BD5CD /* weatherFitWidgetExtension.appex in Embed Foundation Extensions */,
+				D2C5937C2B234EAB0007A2F3 /* FitcastWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,23 +51,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D20640C12ADE85A400CACFC6 /* WeatherFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D20640C42ADE85A400CACFC6 /* WeatherFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitApp.swift; sourceTree = "<group>"; };
+		D20640C12ADE85A400CACFC6 /* Fitcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20640C42ADE85A400CACFC6 /* FitcastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitcastApp.swift; sourceTree = "<group>"; };
 		D20640C62ADE85A400CACFC6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D20640C82ADE85A600CACFC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherFit.entitlements; sourceTree = "<group>"; };
-		D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = weatherFitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20640D42ADE892100CACFC6 /* Fitcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fitcast.entitlements; sourceTree = "<group>"; };
 		D23CCDB02B021006009BD5CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		D23CCDB22B021006009BD5CD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherFitWidgetBundle.swift; sourceTree = "<group>"; };
-		D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherFitWidget.swift; sourceTree = "<group>"; };
-		D23CCDB92B021006009BD5CD /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		D23CCDBB2B021008009BD5CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D23CCDBD2B021008009BD5CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D23CCDC52B021797009BD5CD /* weatherFitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weatherFitWidgetExtension.entitlements; sourceTree = "<group>"; };
-		D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFitManager.swift; sourceTree = "<group>"; };
+		D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitcastManager.swift; sourceTree = "<group>"; };
 		D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInfo.swift; sourceTree = "<group>"; };
+		D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FitcastWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C593712B234EA90007A2F3 /* FitcastWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitcastWidgetBundle.swift; sourceTree = "<group>"; };
+		D2C593732B234EA90007A2F3 /* FitcastWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitcastWidget.swift; sourceTree = "<group>"; };
+		D2C593752B234EA90007A2F3 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		D2C593772B234EAB0007A2F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D2C593792B234EAB0007A2F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2C593802B234F180007A2F3 /* FitcastWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitcastWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMananger.swift; sourceTree = "<group>"; };
 		D2E15B122B15F349002C609F /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		D2F345A72AFA38D800CBE2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -82,12 +81,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D23CCDAB2B021006009BD5CD /* Frameworks */ = {
+		D2C5936A2B234EA90007A2F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D23CCDB32B021006009BD5CD /* SwiftUI.framework in Frameworks */,
-				D23CCDB12B021006009BD5CD /* WidgetKit.framework in Frameworks */,
+				D2C5936F2B234EA90007A2F3 /* SwiftUI.framework in Frameworks */,
+				D2C5936E2B234EA90007A2F3 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,9 +96,9 @@
 		D20640B82ADE85A400CACFC6 = {
 			isa = PBXGroup;
 			children = (
-				D23CCDC52B021797009BD5CD /* weatherFitWidgetExtension.entitlements */,
-				D20640C32ADE85A400CACFC6 /* WeatherFit */,
-				D23CCDB42B021006009BD5CD /* weatherFitWidget */,
+				D2C593802B234F180007A2F3 /* FitcastWidgetExtension.entitlements */,
+				D20640C32ADE85A400CACFC6 /* Fitcast */,
+				D2C593702B234EA90007A2F3 /* FitcastWidget */,
 				D23CCDAF2B021006009BD5CD /* Frameworks */,
 				D20640C22ADE85A400CACFC6 /* Products */,
 			);
@@ -108,27 +107,27 @@
 		D20640C22ADE85A400CACFC6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D20640C12ADE85A400CACFC6 /* WeatherFit.app */,
-				D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */,
+				D20640C12ADE85A400CACFC6 /* Fitcast.app */,
+				D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D20640C32ADE85A400CACFC6 /* WeatherFit */ = {
+		D20640C32ADE85A400CACFC6 /* Fitcast */ = {
 			isa = PBXGroup;
 			children = (
 				D2F345A72AFA38D800CBE2F4 /* Info.plist */,
-				D20640D42ADE892100CACFC6 /* WeatherFit.entitlements */,
-				D20640C42ADE85A400CACFC6 /* WeatherFitApp.swift */,
+				D20640D42ADE892100CACFC6 /* Fitcast.entitlements */,
+				D20640C42ADE85A400CACFC6 /* FitcastApp.swift */,
 				D20640C62ADE85A400CACFC6 /* ContentView.swift */,
-				D28F345A2AEAA75A008BCEE3 /* WeatherFitManager.swift */,
+				D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */,
 				D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */,
 				D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */,
 				D2E15B122B15F349002C609F /* extensions.swift */,
 				D20640C82ADE85A600CACFC6 /* Assets.xcassets */,
 				D20640CA2ADE85A600CACFC6 /* Preview Content */,
 			);
-			path = WeatherFit;
+			path = Fitcast;
 			sourceTree = "<group>";
 		};
 		D20640CA2ADE85A600CACFC6 /* Preview Content */ = {
@@ -148,55 +147,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D23CCDB42B021006009BD5CD /* weatherFitWidget */ = {
+		D2C593702B234EA90007A2F3 /* FitcastWidget */ = {
 			isa = PBXGroup;
 			children = (
-				D23CCDB52B021006009BD5CD /* weatherFitWidgetBundle.swift */,
-				D23CCDB72B021006009BD5CD /* weatherFitWidget.swift */,
-				D23CCDB92B021006009BD5CD /* AppIntent.swift */,
-				D23CCDBB2B021008009BD5CD /* Assets.xcassets */,
-				D23CCDBD2B021008009BD5CD /* Info.plist */,
+				D2C593712B234EA90007A2F3 /* FitcastWidgetBundle.swift */,
+				D2C593732B234EA90007A2F3 /* FitcastWidget.swift */,
+				D2C593752B234EA90007A2F3 /* AppIntent.swift */,
+				D2C593772B234EAB0007A2F3 /* Assets.xcassets */,
+				D2C593792B234EAB0007A2F3 /* Info.plist */,
 			);
-			path = weatherFitWidget;
+			path = FitcastWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D20640C02ADE85A400CACFC6 /* WeatherFit */ = {
+		D20640C02ADE85A400CACFC6 /* Fitcast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D20640CF2ADE85A600CACFC6 /* Build configuration list for PBXNativeTarget "WeatherFit" */;
+			buildConfigurationList = D20640CF2ADE85A600CACFC6 /* Build configuration list for PBXNativeTarget "Fitcast" */;
 			buildPhases = (
 				D20640BD2ADE85A400CACFC6 /* Sources */,
 				D20640BE2ADE85A400CACFC6 /* Frameworks */,
 				D20640BF2ADE85A400CACFC6 /* Resources */,
-				D23CCDC12B021008009BD5CD /* Embed Foundation Extensions */,
+				D29EB73F2B231A93003D0A94 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D23CCDBF2B021008009BD5CD /* PBXTargetDependency */,
+				D2C5937B2B234EAB0007A2F3 /* PBXTargetDependency */,
 			);
-			name = WeatherFit;
+			name = Fitcast;
 			productName = WeatherFit;
-			productReference = D20640C12ADE85A400CACFC6 /* WeatherFit.app */;
+			productReference = D20640C12ADE85A400CACFC6 /* Fitcast.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */ = {
+		D2C5936C2B234EA90007A2F3 /* FitcastWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D23CCDC42B021008009BD5CD /* Build configuration list for PBXNativeTarget "weatherFitWidgetExtension" */;
+			buildConfigurationList = D2C5937D2B234EAB0007A2F3 /* Build configuration list for PBXNativeTarget "FitcastWidgetExtension" */;
 			buildPhases = (
-				D23CCDAA2B021006009BD5CD /* Sources */,
-				D23CCDAB2B021006009BD5CD /* Frameworks */,
-				D23CCDAC2B021006009BD5CD /* Resources */,
+				D2C593692B234EA90007A2F3 /* Sources */,
+				D2C5936A2B234EA90007A2F3 /* Frameworks */,
+				D2C5936B2B234EA90007A2F3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = weatherFitWidgetExtension;
-			productName = weatherFitWidgetExtension;
-			productReference = D23CCDAE2B021006009BD5CD /* weatherFitWidgetExtension.appex */;
+			name = FitcastWidgetExtension;
+			productName = FitcastWidgetExtension;
+			productReference = D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -212,12 +211,12 @@
 					D20640C02ADE85A400CACFC6 = {
 						CreatedOnToolsVersion = 15.0;
 					};
-					D23CCDAD2B021006009BD5CD = {
+					D2C5936C2B234EA90007A2F3 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
-			buildConfigurationList = D20640BC2ADE85A400CACFC6 /* Build configuration list for PBXProject "WeatherFit" */;
+			buildConfigurationList = D20640BC2ADE85A400CACFC6 /* Build configuration list for PBXProject "Fitcast" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -230,8 +229,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D20640C02ADE85A400CACFC6 /* WeatherFit */,
-				D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */,
+				D20640C02ADE85A400CACFC6 /* Fitcast */,
+				D2C5936C2B234EA90007A2F3 /* FitcastWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -246,11 +245,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D23CCDAC2B021006009BD5CD /* Resources */ = {
+		D2C5936B2B234EA90007A2F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D23CCDBC2B021008009BD5CD /* Assets.xcassets in Resources */,
+				D2C593782B234EAB0007A2F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,33 +262,32 @@
 			files = (
 				D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */,
 				D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */,
-				D20640C52ADE85A400CACFC6 /* WeatherFitApp.swift in Sources */,
-				D28F345B2AEAA75A008BCEE3 /* WeatherFitManager.swift in Sources */,
+				D20640C52ADE85A400CACFC6 /* FitcastApp.swift in Sources */,
+				D28F345B2AEAA75A008BCEE3 /* FitcastManager.swift in Sources */,
 				D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */,
 				D2E15B132B15F349002C609F /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D23CCDAA2B021006009BD5CD /* Sources */ = {
+		D2C593692B234EA90007A2F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D23CCDB82B021006009BD5CD /* weatherFitWidget.swift in Sources */,
-				D29B815C2B03E618002EF6CF /* LocationMananger.swift in Sources */,
-				D23CCDB62B021006009BD5CD /* weatherFitWidgetBundle.swift in Sources */,
-				D23CCDBA2B021006009BD5CD /* AppIntent.swift in Sources */,
-				D29B815B2B03E5C1002EF6CF /* ForecastInfo.swift in Sources */,
-				D2E15B142B15F349002C609F /* extensions.swift in Sources */,
+				D2C593822B234F280007A2F3 /* extensions.swift in Sources */,
+				D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */,
+				D2C593722B234EA90007A2F3 /* FitcastWidgetBundle.swift in Sources */,
+				D2C593762B234EA90007A2F3 /* AppIntent.swift in Sources */,
+				D2C593812B234F260007A2F3 /* LocationMananger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D23CCDBF2B021008009BD5CD /* PBXTargetDependency */ = {
+		D2C5937B2B234EAB0007A2F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D23CCDAD2B021006009BD5CD /* weatherFitWidgetExtension */;
-			targetProxy = D23CCDBE2B021008009BD5CD /* PBXContainerItemProxy */;
+			target = D2C5936C2B234EA90007A2F3 /* FitcastWidgetExtension */;
+			targetProxy = D2C5937A2B234EAB0007A2F3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -419,14 +417,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WeatherFit/WeatherFit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Fitcast/Fitcast.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WeatherFit/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Fitcast/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherFit/Info.plist;
+				INFOPLIST_FILE = Fitcast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Fitcast;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -439,8 +439,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -456,14 +457,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WeatherFit/WeatherFit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Fitcast/Fitcast.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WeatherFit/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Fitcast/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherFit/Info.plist;
+				INFOPLIST_FILE = Fitcast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Fitcast;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -476,8 +479,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -487,29 +491,27 @@
 			};
 			name = Release;
 		};
-		D23CCDC22B021008009BD5CD /* Debug */ = {
+		D2C5937E2B234EAB0007A2F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FitcastWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = weatherFitWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = weatherFitWidget;
+				INFOPLIST_FILE = FitcastWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitcastWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationUsageDescription = "위치 권한 허용 문구";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "[위젯] 사용자의 위치를 사용합니다.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast.FitcastWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -519,29 +521,27 @@
 			};
 			name = Debug;
 		};
-		D23CCDC32B021008009BD5CD /* Release */ = {
+		D2C5937F2B234EAB0007A2F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = weatherFitWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FitcastWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = weatherFitWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = weatherFitWidget;
+				INFOPLIST_FILE = FitcastWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitcastWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationUsageDescription = "위치 권한 허용 문구";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "[위젯] 사용자의 위치를 사용합니다.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hyun.WeatherFit.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast.FitcastWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -554,7 +554,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D20640BC2ADE85A400CACFC6 /* Build configuration list for PBXProject "WeatherFit" */ = {
+		D20640BC2ADE85A400CACFC6 /* Build configuration list for PBXProject "Fitcast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D20640CD2ADE85A600CACFC6 /* Debug */,
@@ -563,7 +563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D20640CF2ADE85A600CACFC6 /* Build configuration list for PBXNativeTarget "WeatherFit" */ = {
+		D20640CF2ADE85A600CACFC6 /* Build configuration list for PBXNativeTarget "Fitcast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D20640D02ADE85A600CACFC6 /* Debug */,
@@ -572,11 +572,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D23CCDC42B021008009BD5CD /* Build configuration list for PBXNativeTarget "weatherFitWidgetExtension" */ = {
+		D2C5937D2B234EAB0007A2F3 /* Build configuration list for PBXNativeTarget "FitcastWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D23CCDC22B021008009BD5CD /* Debug */,
-				D23CCDC32B021008009BD5CD /* Release */,
+				D2C5937E2B234EAB0007A2F3 /* Debug */,
+				D2C5937F2B234EAB0007A2F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

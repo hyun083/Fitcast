@@ -1,8 +1,8 @@
 //
 //  AppIntent.swift
-//  weatherFitWidget
+//  FitcastWidget
 //
-//  Created by Hyun on 11/13/23.
+//  Created by Hyun on 12/8/23.
 //
 
 import WidgetKit
