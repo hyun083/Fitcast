@@ -11,10 +11,12 @@
 		D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C62ADE85A400CACFC6 /* ContentView.swift */; };
 		D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640C82ADE85A600CACFC6 /* Assets.xcassets */; };
 		D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */; };
+		D2564F4C2B24728A00598E00 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
+		D2564F4D2B24728A00598E00 /* SwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2564F4F2B24728C00598E00 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; };
+		D2564F502B24728C00598E00 /* WidgetKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D28F345B2AEAA75A008BCEE3 /* FitcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */; };
 		D28F345D2AEAAB4B008BCEE3 /* ForecastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */; };
-		D2C5936E2B234EA90007A2F3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB02B021006009BD5CD /* WidgetKit.framework */; };
-		D2C5936F2B234EA90007A2F3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
 		D2C593722B234EA90007A2F3 /* FitcastWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593712B234EA90007A2F3 /* FitcastWidgetBundle.swift */; };
 		D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593732B234EA90007A2F3 /* FitcastWidget.swift */; };
 		D2C593762B234EA90007A2F3 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C593752B234EA90007A2F3 /* AppIntent.swift */; };
@@ -37,6 +39,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D2564F4E2B24728A00598E00 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2564F4D2B24728A00598E00 /* SwiftUI.framework in Embed Frameworks */,
+				D2564F502B24728C00598E00 /* WidgetKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D29EB73F2B231A93003D0A94 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,8 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C5936F2B234EA90007A2F3 /* SwiftUI.framework in Frameworks */,
-				D2C5936E2B234EA90007A2F3 /* WidgetKit.framework in Frameworks */,
+				D2564F4C2B24728A00598E00 /* SwiftUI.framework in Frameworks */,
+				D2564F4F2B24728C00598E00 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +202,7 @@
 				D2C593692B234EA90007A2F3 /* Sources */,
 				D2C5936A2B234EA90007A2F3 /* Frameworks */,
 				D2C5936B2B234EA90007A2F3 /* Resources */,
+				D2564F4E2B24728A00598E00 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -218,11 +233,11 @@
 			};
 			buildConfigurationList = D20640BC2ADE85A400CACFC6 /* Build configuration list for PBXProject "Fitcast" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
 			);
 			mainGroup = D20640B82ADE85A400CACFC6;
 			productRefGroup = D20640C22ADE85A400CACFC6 /* Products */;
@@ -427,10 +442,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fitcast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fitcast;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자 위치의 기상 정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -467,10 +482,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fitcast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fitcast;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 지역의 날씨정보를 표시합니다.";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자 위치의 기상 정보를 표시합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -500,6 +515,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitcastWidget/Info.plist;
@@ -530,6 +546,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2GY4XTB4R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitcastWidget/Info.plist;
