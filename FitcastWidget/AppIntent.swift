@@ -42,9 +42,8 @@ struct WidgetLocationQuery: EntityQuery {
 }
 
 struct SelectLocationIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Widget Location"
-    static var description = IntentDescription("Select Widget location")
-
+    static var title: LocalizedStringResource = "Location"
+    static var description = IntentDescription("Location for weather service")
     @Parameter(title: "위치")
     var location: WidgetLocation
 }
