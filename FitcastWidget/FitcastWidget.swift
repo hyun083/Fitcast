@@ -21,7 +21,7 @@ struct Provider: AppIntentTimelineProvider {
     private static let seasons = winter + autumn + spring + summer
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
+        SimpleEntry(date: Date(), configuration: SelectLocationIntent(), currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
     }
 
     func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
@@ -35,7 +35,7 @@ struct Provider: AppIntentTimelineProvider {
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
         
-        return SimpleEntry(date: Date(), currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
+        return SimpleEntry(date: Date(), configuration: configuration, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
     }
     
     func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -55,7 +55,7 @@ struct Provider: AppIntentTimelineProvider {
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
             
-            let entry = SimpleEntry(date: entryDate, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
             entries.append(entry)
         }
         
@@ -65,6 +65,7 @@ struct Provider: AppIntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let configuration: SelectLocationIntent
     var currTemp: String
     var currSymbolName: String
     var currAddress: String
@@ -80,7 +81,11 @@ struct FitcastWidgetEntryView : View {
             LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [.blue,.cyan]:[.black,Color(#colorLiteral(red: 0.1437649727, green: 0.2230264843, blue: 0.3401089311, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             GeometryReader{ geo in
                 VStack(alignment: .leading){
-                    Text(entry.currAddress)
+                    HStack{
+                        Text(entry.currAddress)
+                        Image(systemName: entry.configuration.location.id=="나의 위치" ? "location.fill":"")
+                            .font(.caption2)
+                    }
                     HStack{
                         Image(systemName: entry.currSymbolName)
                             .renderingMode(.original)
@@ -114,5 +119,5 @@ struct FitcastWidget: Widget {
 #Preview(as: .systemSmall) {
     FitcastWidget()
 } timeline: {
-    SimpleEntry(date: Date(), currTemp: "19º", currSymbolName: "cloud.sun.fill", currAddress: "용인", recommandFit: "추천 옷차림")
+    SimpleEntry(date: Date(), configuration: SelectLocationIntent(), currTemp: "19º", currSymbolName: "cloud.sun.fill", currAddress: "용인", recommandFit: "추천 옷차림")
 }
