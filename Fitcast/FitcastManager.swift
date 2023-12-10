@@ -24,7 +24,7 @@ import CoreLocation
     func getWeather() async{
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
-                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation?.coordinate.latitude ?? 37.27807821976637,longitude: self.locationManager.lastLocation?.coordinate.longitude ?? 127.15216520791188))
+                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation.coordinate.latitude,longitude: self.locationManager.lastLocation.coordinate.longitude))
             }).value
             model = createForecastInfo()
         } catch{
@@ -33,7 +33,7 @@ import CoreLocation
     }
     
     func updateLocation(){
-        self.locationManager = LocationManager()
+        self.locationManager.locationManager.startUpdatingLocation()
     }
     
     func createForecastInfo() -> ForecastInfo?{
@@ -54,7 +54,7 @@ import CoreLocation
     }
     
     var currAddress: String{
-        locationManager.userAddress ?? "--"
+        locationManager.userAddress
     }
     
     var currSymbolName: String{

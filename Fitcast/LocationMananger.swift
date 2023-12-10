@@ -11,10 +11,10 @@ import SwiftUI
 import WidgetKit
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    private let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     private var locationStatus: CLAuthorizationStatus?
-    private (set) var lastLocation: CLLocation?
-    private (set) var userAddress: String?
+    private (set) var lastLocation: CLLocation = CLLocation(latitude: 37.27807821976637, longitude: 127.15216520791188)
+    private (set) var userAddress: String = "--"
 
     override init() {
         super.init()
@@ -22,6 +22,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        getUseraddress()
         WidgetCenter.shared.reloadAllTimelines()
     }
 
@@ -55,12 +56,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func getUseraddress(){
-        let defaultLocation = CLLocation(latitude: 37.27807821976637, longitude: 127.15216520791188)
         let locale = Locale(identifier: UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? "ko_KR")
         let geocoder = CLGeocoder()
         
         //지오코더 사용 국가체계에 맞는 주소정보를 반환해준다.
-        geocoder.reverseGeocodeLocation(lastLocation ?? defaultLocation, preferredLocale: locale, completionHandler: {(placemarks, error) -> Void in
+        geocoder.reverseGeocodeLocation(lastLocation, preferredLocale: locale, completionHandler: {(placemarks, error) -> Void in
             if let address: [CLPlacemark] = placemarks {
                 //행정구역 ex)경기도,경상도,강원도...
 //                if let adminArea: String = address.last?.administrativeArea{

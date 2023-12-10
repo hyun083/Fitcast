@@ -27,11 +27,11 @@ struct Provider: AppIntentTimelineProvider {
     func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
-                for: locationManager.lastLocation ?? CLLocation(latitude: 0, longitude: 0),
+                for: locationManager.lastLocation ,
               including: .current)
             return forecast
           }.value
-        let address = locationManager.userAddress ?? "--"
+        let address = locationManager.userAddress 
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
         
@@ -41,7 +41,7 @@ struct Provider: AppIntentTimelineProvider {
     func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
-                for: locationManager.lastLocation ?? CLLocation(latitude: 0, longitude: 0),
+                for: locationManager.lastLocation ,
               including: .current)
             return forecast
           }.value
@@ -51,7 +51,7 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-            let address = locationManager.userAddress ?? "--"
+            let address = locationManager.userAddress
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
             
