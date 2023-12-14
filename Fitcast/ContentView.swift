@@ -56,21 +56,29 @@ struct ContentView: View {
                 .shadow(radius: 1, y:1.3)
                 
                 //MARK: - HourlyWeather
-                ScrollView(.horizontal, showsIndicators: false){
-                    ZStack{
-                        Color.white
-                            .blur(radius: 350)
-                        LazyHStack(alignment: .center, spacing: 27, content: {
-                            ForEach(viewModel.hourlyWeatherInfo) { info in
-                                WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
-                            }
+                ZStack{
+                    Color.white
+                        .blur(radius: 350)
+                    VStack(alignment:.trailing){
+                        ScrollView(.horizontal, showsIndicators: false){
+                            LazyHStack(alignment: .center, spacing: 25, content: {
+                                ForEach(viewModel.hourlyWeatherInfo) { info in
+                                    WeatherView(date: info.date, condition: info.condition, temp: info.temp, symbolName: info.symbolName.safeSymbolName())
+                                }
+                            })
+                        }
+                        .padding(EdgeInsets(top: 30, leading: 10, bottom: 0, trailing: 10))
+                        
+                        Link(destination: URL(string: "https://developer.apple.com/weatherkit/data-source-attribution/")!, label: {
+                            Text("provided by  Weather")
+                                .font(.caption2)
                         })
+                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 5, trailing: 15))
                     }
-                    .padding(.all)
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal)
-                .frame(height: 150)
+                .frame(height: 160)
                 
                 //MARK: - Closet
                 GeometryReader { geo in
