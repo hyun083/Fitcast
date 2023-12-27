@@ -23,3 +23,11 @@
 ![MVVM](https://github.com/hyun083/Fitcast/assets/58415560/53932c11-e480-416d-8a31-84791de307aa)
 
 SwiftUI를 사용해보고 싶어 이에 알맞은 MVVM 디자인 패턴을 적용했습니다.
+
+# 스크린샷
+
+|![fitcast image light](https://github.com/hyun083/Fitcast/assets/58415560/ac71b568-69cf-4130-9672-c0755224c4bf)|![fitcast image dark](https://github.com/hyun083/Fitcast/assets/58415560/cd22e80d-5e18-472e-a243-f6335e49410f)|
+|:---:|:---:|
+|라이트와 다크모드 두가지 배경화면을 제공합니다.|하단의 pickerView를 통해 사용자의 외출시간을 지정합니다. 해당 시간은 UserDefaults로 설정되어 마지막 값이 항상 저장됩니다.|
+|![fitcast image widget light](https://github.com/hyun083/Fitcast/assets/58415560/c9c7575c-8936-425c-b6a0-0582901dc1cd)|![fitcast image widget dark](https://github.com/hyun083/Fitcast/assets/58415560/eb02d889-377e-44cd-ad85-dc04d7d84694)|
+|위젝도 마찬가지로 두가지 배경화면을 제공합니다. 라이트모드와 다크모드의 여부로 화면이 변경됩니다.|사용자의 실시간 위치를 기반으로 현재 기온이 표시되며, 이에 알맞은 옷차림을 보여줍니다.|
