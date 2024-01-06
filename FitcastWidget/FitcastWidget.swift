@@ -31,6 +31,7 @@ struct Provider: AppIntentTimelineProvider {
               including: .current)
             return forecast
           }.value
+        locationManager.locationManager.startUpdatingLocation()
         let address = locationManager.userAddress 
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
@@ -51,6 +52,7 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
+            locationManager.locationManager.startUpdatingLocation()
             let address = locationManager.userAddress
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"

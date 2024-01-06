@@ -22,7 +22,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        getUseraddress()
         WidgetCenter.shared.reloadAllTimelines()
     }
 
