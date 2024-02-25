@@ -16,6 +16,8 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var scrollViewSize: CGSize = .zero
     @State var closetPosition: ForecastInfo.Clothes.ID?
+    @State var isListViewPresented = false
+    @State var isSearchViewPresented = false
     
     var body: some View {
         ZStack{
@@ -111,6 +113,30 @@ struct ContentView: View {
                     timePicker(selectedTime: $viewModel.startTime, idx: [Int](0...23))
                     timePicker(selectedTime: $viewModel.endTime, idx: [Int](0...23))
                 }
+                
+                //MARK: - searchView
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        self.isSearchViewPresented.toggle()
+                    }, label: {
+                        Image(systemName: "magnifyingglass")
+                    })
+                    .fullScreenCover(isPresented: $isSearchViewPresented, content: {
+                        SearchView(locationSearchService: LocationSearchService(), viewModel: viewModel, isVisible: $isSearchViewPresented)
+                    })
+                    Spacer()
+                    Button(action: {
+                        self.isListViewPresented.toggle()
+                    }, label: {
+                        Image(systemName: "list.bullet")
+                    })
+                    .fullScreenCover(isPresented: $isListViewPresented, content: {
+                        ListView(viewModel: viewModel, isListViewVisible: $isListViewPresented)
+                    })
+                    Spacer()
+                }
+//                .padding(.bottom)
             }
             .task{
                 await viewModel.getWeather()
