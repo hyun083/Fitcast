@@ -54,6 +54,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         WidgetCenter.shared.reloadAllTimelines()
     }
     
+    func updateLocation(to location: FitcastLocation){
+        lastLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        userAddress = location.locality
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
     func getUseraddress(){
         let locale = Locale(identifier: UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? "ko_KR")
         let geocoder = CLGeocoder()
