@@ -21,6 +21,39 @@ import CoreLocation
     private static let seasons = winter + autumn + spring + summer
     private static let tempRange = ["~ 4º","5 ~ 8º","9 ~ 11º","12 ~ 16º","17 ~ 19º","20 ~ 22º","23 ~ 27º","28º ~"]
     
+    var locationList = getLocationList()
+    
+    private static func getLocationList() -> [FitcastLocation]{
+        if let data = UserDefaults.shared.data(forKey: "locationList"){
+            return try! PropertyListDecoder().decode([FitcastLocation].self, from: data)
+        }else{
+            return [FitcastLocation]()
+        }
+    }
+    
+    func updateLocationList(){
+        if let data = try? PropertyListEncoder().encode(locationList){
+            UserDefaults.shared.set(data, forKey: "locationList")
+            print("remove safely")
+        }
+    }
+    
+    func addNewLocation(_ newLocation:FitcastLocation){
+        if !locationList.contains(where: {$0 == newLocation}){
+            locationList.append(newLocation)
+            updateLocationList()
+        }
+    }
+    
+    func removeLocationAt(index:IndexSet){
+        locationList.remove(atOffsets: index)
+        updateLocationList()
+    }
+    
+    func moveLocation(From currIndex:IndexSet, to newIndex:Int){
+        locationList.move(fromOffsets: currIndex, toOffset: newIndex)
+    }
+    
     func getWeather() async{
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
@@ -34,6 +67,11 @@ import CoreLocation
     
     func updateLocation(){
         self.locationManager.locationManager.startUpdatingLocation()
+    }
+    
+    func updateLocation(to location:FitcastLocation){
+        self.locationManager.updateLocation(to: location)
+        objectWillChange.send()
     }
     
     func createForecastInfo() -> ForecastInfo?{
