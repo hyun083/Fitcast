@@ -18,11 +18,19 @@
   - 사용자의 외출시간에 맞는 옷차림을 바로 확인할 수 있습니다.
 - 실시간 기온에 맞는 옷차림 정보를 위젯으로 제공합니다.
   - 급하게 외출할 경우 위젯을 통해 간편하게 적절한 옷차림을 확인 할 수 있습니다.
+- (예정) 사용자가 직접 원하는 지역 정보를 검색합니다.
+  - (예정) 검색한 지역은 리스트로 저장되어 제공됩니다.
 
 # 앱 구조
-![MVVM](https://github.com/hyun083/Fitcast/assets/58415560/53932c11-e480-416d-8a31-84791de307aa)
+![MVVM-Architecture](https://github.com/hyun083/Fitcast/assets/58415560/9adf2648-cd3f-4ae5-b8c5-96ea3226d5b5)
 
-SwiftUI를 사용해보고 싶어 이에 알맞은 MVVM 디자인 패턴을 적용했습니다.
+SwiftUI에 알맞은 MVVM 패턴을 통해 뷰와 뷰모델간 3대1의 관계를 설정하였습니다.
+
+# file hierarchy
+
+![MVVM-file hierarchy](https://github.com/hyun083/Fitcast/assets/58415560/e16a592a-4b10-4500-bc26-f025f6cc162d)
+
+프로젝트의 디렉토리 구조는 다음과 같습니다.
 
 # 스크린샷
 
