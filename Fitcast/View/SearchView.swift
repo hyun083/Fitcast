@@ -12,26 +12,29 @@ import MapKit
 import Combine
 
 struct SearchView: View{
-    @ObservedObject var locationSearchService: LocationSearchService
     @ObservedObject var viewModel: FitcastManager
     @Environment(\.colorScheme) var colorScheme
-    @State var target = CLLocationCoordinate2D()
-    @Binding var isVisible: Bool
+    @Binding var isSearchViewVisible: Bool
     
     var body: some View{
         NavigationView{
             VStack{
-                SearchBar(text: $locationSearchService.searchQuery)
+                SearchBar(text: $viewModel.locationSearchService.searchQuery)
                 
-                List(locationSearchService.completions){ completion in
+                List(viewModel.locationSearchService.completions){ completion in
                     VStack(alignment: .leading){
                         Button(action: {
                             CLGeocoder().geocodeAddressString(completion.title) { (placemarks, error) in
                                 if let placemarks = placemarks, let location = placemarks.first?.location{
-                                    self.target = location.coordinate
-                                    let area = placemarks.first?.locality ?? "locality error"
+                                    let area = placemarks.first?.subLocality ?? placemarks.first?.locality ?? placemarks.first?.administrativeArea ?? completion.title
+                                    
                                     let newLocation = FitcastLocation(title: completion.title, locality:  area, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                                     viewModel.addNewLocation(newLocation)
+                                    viewModel.updateLocation(to: newLocation)
+                                    Task{
+                                        await viewModel.getWeather()
+                                    }
+                                    self.isSearchViewVisible.toggle()
                                 } else {
                                     print("주소를 찾을 수 없습니다.")
                                 }
@@ -42,17 +45,16 @@ struct SearchView: View{
                     }
                 }
                 .contentMargins(0)
-                .onChange(of: target, {
-                    print("this is listView")
-                    print(viewModel.locationList)
-                    self.isVisible.toggle()
+                .onChange(of: self.isSearchViewVisible, {
+                    viewModel.locationSearchService.searchQuery = ""
+                    viewModel.locationSearchService.completions = []
                 })
             }
             .navigationTitle("지역 정보 추가")
             .toolbar{
                 ToolbarItemGroup(placement: .topBarTrailing, content: {
                     Button("완료"){
-                        self.isVisible.toggle()
+                        self.isSearchViewVisible.toggle()
                     }
                     .foregroundStyle(Color.accentColor)
                     .font(.title3)
@@ -96,52 +98,10 @@ struct SearchBar: UIViewRepresentable{
     }
 }
 
-class LocationSearchService: NSObject, ObservableObject, MKLocalSearchCompleterDelegate{
-    @Published var searchQuery = ""
-    var completer: MKLocalSearchCompleter
-    @Published var completions: [MKLocalSearchCompletion] = []
-    var cancellable: AnyCancellable?
-    
-    override init(){
-        completer = MKLocalSearchCompleter()
-        completer.resultTypes = .address
-        super.init()
-        cancellable = $searchQuery.assign(to: \.queryFragment, on: self.completer)
-        completer.delegate = self
-    }
-    
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        self.completions = completer.results
-    }
-    
-    func getCoordinate(from address:String) -> CLLocationCoordinate2D{
-        var res = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-        
-        CLGeocoder().geocodeAddressString(address) { (placemarks, error) in
-            if let placemarks = placemarks, let location = placemarks.first?.location {
-                print(location.coordinate)
-                res = location.coordinate
-                
-            } else {
-                print("주소를 찾을 수 없습니다.")
-            }
-        }
-        
-        return res
-    }
-}
-
 struct SearchView_preview: PreviewProvider{
     @State static var flag = true
     
     static var previews: some View {
-        SearchView(locationSearchService: LocationSearchService(), viewModel: FitcastManager(), isVisible: $flag)
-    }
-}
-
-extension MKLocalSearchCompletion: Identifiable{}
-extension CLLocationCoordinate2D : Equatable{
-    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        lhs.latitude == rhs.latitude ? lhs.longitude==rhs.longitude : lhs.latitude==rhs.latitude
+        SearchView(viewModel: FitcastManager(), isSearchViewVisible: $flag)
     }
 }

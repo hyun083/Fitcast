@@ -123,7 +123,7 @@ struct ContentView: View {
                         Image(systemName: "magnifyingglass")
                     })
                     .fullScreenCover(isPresented: $isSearchViewPresented, content: {
-                        SearchView(locationSearchService: LocationSearchService(), viewModel: viewModel, isVisible: $isSearchViewPresented)
+                        SearchView(viewModel: viewModel, isSearchViewVisible: $isSearchViewPresented)
                     })
                     Spacer()
                     Button(action: {

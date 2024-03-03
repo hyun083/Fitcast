@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension UserDefaults {
     static var shared: UserDefaults {
@@ -43,5 +44,12 @@ extension Int{
                 return 7
             }
         }
+    }
+}
+
+extension MKLocalSearchCompletion: Identifiable{}
+extension CLLocationCoordinate2D : Equatable{
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude ? lhs.longitude==rhs.longitude : lhs.latitude==rhs.latitude
     }
 }

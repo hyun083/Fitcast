@@ -13,6 +13,7 @@ import CoreLocation
     var weather: Weather?
     @Published private var model: ForecastInfo?
     @Published private var locationManager = LocationManager()
+    @Published var locationSearchService = LocationSearchService()
     
     private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
     private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
@@ -60,6 +61,7 @@ import CoreLocation
                 return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation.coordinate.latitude,longitude: self.locationManager.lastLocation.coordinate.longitude))
             }).value
             model = createForecastInfo()
+            objectWillChange.send()
         } catch{
             fatalError("\(error)")
         }
@@ -71,7 +73,6 @@ import CoreLocation
     
     func updateLocation(to location:FitcastLocation){
         self.locationManager.updateLocation(to: location)
-        objectWillChange.send()
     }
     
     func createForecastInfo() -> ForecastInfo?{
