@@ -20,7 +20,7 @@ struct ListView: View{
 //            }
             List(){
                 Button(action: {
-                    viewModel.updateLocation()
+                    viewModel.updateLocation()    
                     Task{
                         await viewModel.getWeather()
                     }
