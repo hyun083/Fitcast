@@ -11,7 +11,6 @@
 		D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20640C62ADE85A400CACFC6 /* ContentView.swift */; };
 		D20640C92ADE85A600CACFC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640C82ADE85A600CACFC6 /* Assets.xcassets */; };
 		D20640CC2ADE85A600CACFC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D20640CB2ADE85A600CACFC6 /* Preview Assets.xcassets */; };
-		D21A61962B8F374400343161 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
 		D21A61972B8F376300343161 /* FitcastLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D282C9742B74DA980050CA36 /* FitcastLocation.swift */; };
 		D2458F0F2B723003001AAFEB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2458F0E2B723003001AAFEB /* ListView.swift */; };
 		D2564F4C2B24728A00598E00 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23CCDB22B021006009BD5CD /* SwiftUI.framework */; };
@@ -27,7 +26,7 @@
 		D2C5937C2B234EAB0007A2F3 /* FitcastWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D2C593822B234F280007A2F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 		D2C9C1142B494453002DDE8C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9C1132B494453002DDE8C /* SearchView.swift */; };
-		D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */; };
+		D2D9C2B32BD16F1400AC8C24 /* FitcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */; };
 		D2E15B132B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -159,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				D282C9742B74DA980050CA36 /* FitcastLocation.swift */,
-				D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */,
 				D2B6A0002B946F9800192F53 /* LocationSearchService.swift */,
 				D28F345C2AEAAB4B008BCEE3 /* ForecastInfo.swift */,
 			);
@@ -307,7 +305,6 @@
 			files = (
 				D2458F0F2B723003001AAFEB /* ListView.swift in Sources */,
 				D20640C72ADE85A400CACFC6 /* ContentView.swift in Sources */,
-				D2DBBCB72AF0E5B60072ADF3 /* LocationMananger.swift in Sources */,
 				D20640C52ADE85A400CACFC6 /* FitcastApp.swift in Sources */,
 				D2B6A0012B946F9800192F53 /* LocationSearchService.swift in Sources */,
 				D2C9C1142B494453002DDE8C /* SearchView.swift in Sources */,
@@ -322,8 +319,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D9C2B32BD16F1400AC8C24 /* FitcastManager.swift in Sources */,
 				D2C593822B234F280007A2F3 /* extensions.swift in Sources */,
-				D21A61962B8F374400343161 /* LocationMananger.swift in Sources */,
 				D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */,
 				D21A61972B8F376300343161 /* FitcastLocation.swift in Sources */,
 				D2C593722B234EA90007A2F3 /* FitcastWidgetBundle.swift in Sources */,

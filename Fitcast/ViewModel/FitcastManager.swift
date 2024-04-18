@@ -8,12 +8,17 @@
 import Foundation
 import WeatherKit
 import CoreLocation
+import WidgetKit
 
-@MainActor class FitcastManager: ObservableObject{
-    var weather: Weather?
+@MainActor
+class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published private var model: ForecastInfo?
-    @Published private var locationManager = LocationManager()
-    @Published var locationSearchService = LocationSearchService()
+    @Published var locationSearchService: LocationSearchService
+    @Published private (set) var publishedLocation: CLLocation
+    @Published private (set) var addressLabel: String
+    
+    private var locationStatus: CLAuthorizationStatus?
+    private let locationManager = CLLocationManager()
     
     private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
     private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
@@ -23,6 +28,74 @@ import CoreLocation
     private static let tempRange = ["~ 4º","5 ~ 8º","9 ~ 11º","12 ~ 16º","17 ~ 19º","20 ~ 22º","23 ~ 27º","28º ~"]
     
     var locationList = getLocationList()
+    var weather: Weather?
+    
+    override init() {
+        self.locationSearchService = LocationSearchService()
+        self.publishedLocation = CLLocation(latitude: 0, longitude: 0)
+        self.addressLabel = "--"
+        
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        print(#function,"locationManager init")
+        
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    //MARK: -LocationManager
+    
+    var statusString: String {
+        guard let status = locationStatus else {
+            return "unknown"
+        }
+        
+        switch status {
+        case .notDetermined: return "notDetermined"
+        case .authorizedWhenInUse: return "authorizedWhenInUse"
+        case .authorizedAlways: return "authorizedAlways"
+        case .restricted: return "restricted"
+        case .denied: return "denied"
+        default: return "unknown"
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationStatus = status
+        print(#function, statusString)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            print(#function, "fail error")
+            return
+        }
+        publishedLocation = location
+        print(#function,": \(publishedLocation)")
+        locationManager.stopUpdatingLocation()
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    func updateLocation(to location: FitcastLocation){
+        publishedLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        print(#function,publishedLocation)
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    func updateAddress() async -> String {
+        let locale = Locale(identifier: UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? "ko_KR")
+        let geocoder = CLGeocoder()
+        
+        do{
+            let placemark = try await geocoder.reverseGeocodeLocation(publishedLocation, preferredLocale: locale).last!
+            print(#function,"location: \(publishedLocation), placemark:\(placemark.name!)")
+            return placemark.locality ?? placemark.subAdministrativeArea ?? placemark.administrativeArea ?? "--"
+        }catch{
+            fatalError("error on useraddress")
+        }
+    }
     
     private static func getLocationList() -> [FitcastLocation]{
         if let data = UserDefaults.shared.data(forKey: "locationList"){
@@ -35,7 +108,7 @@ import CoreLocation
     func updateLocationList(){
         if let data = try? PropertyListEncoder().encode(locationList){
             UserDefaults.shared.set(data, forKey: "locationList")
-            print("remove safely")
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     
@@ -54,25 +127,40 @@ import CoreLocation
     func moveLocation(From currIndex:IndexSet, to newIndex:Int){
         locationList.move(fromOffsets: currIndex, toOffset: newIndex)
     }
+   
+    func updateLocation() {
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func updateUserAddress() async{
+        addressLabel = await self.updateAddress()
+    }
+    
+    var selectedCurrLocation: Bool = UserDefaults.shared.bool(forKey: "selectedCurrLocation"){
+        willSet{
+            UserDefaults.shared.set(newValue, forKey: "selectedCurrLocation")
+            objectWillChange.send()
+        }
+    }
+    
+    var selectedLocationIdx: Int = UserDefaults.shared.integer(forKey: "selectedLoctionIdx"){
+        willSet{
+            UserDefaults.shared.set(newValue, forKey: "selectedLoctionIdx")
+            objectWillChange.send()
+        }
+    }
+
+    //MARK: - WeatherService
     
     func getWeather() async{
         do{
             weather = try await Task.detached(priority: .userInitiated, operation: {
-                return try await WeatherService.shared.weather(for:.init(latitude: self.locationManager.lastLocation.coordinate.latitude,longitude: self.locationManager.lastLocation.coordinate.longitude))
+                return try await WeatherService.shared.weather(for:.init(latitude: self.publishedLocation.coordinate.latitude,longitude: self.publishedLocation.coordinate.longitude))
             }).value
             model = createForecastInfo()
-            objectWillChange.send()
         } catch{
             fatalError("\(error)")
         }
-    }
-    
-    func updateLocation(){
-        self.locationManager.locationManager.startUpdatingLocation()
-    }
-    
-    func updateLocation(to location:FitcastLocation){
-        self.locationManager.updateLocation(to: location)
     }
     
     func createForecastInfo() -> ForecastInfo?{
@@ -90,10 +178,6 @@ import CoreLocation
     
     var closet: [ForecastInfo.Clothes]{
         model?.closet ?? [ForecastInfo.Clothes]()
-    }
-    
-    var currAddress: String{
-        locationManager.userAddress
     }
     
     var currSymbolName: String{
@@ -116,6 +200,7 @@ import CoreLocation
         model?.now ?? Int(Calendar.current.component(.hour, from: Date()))
     }
     
+    
     var startTime: Int = UserDefaults.shared.integer(forKey: "startTime"){
         willSet{
             UserDefaults.shared.set(newValue, forKey: "startTime")
@@ -134,7 +219,7 @@ import CoreLocation
         get{
             let hourlyForecast = model?.hourlyWeather ?? [ForecastInfo.WeatherInfo]()
             let now = Int(Calendar.current.component(.hour, from: Date()))
-
+            
             var lower = startTime
             var upper = endTime
             

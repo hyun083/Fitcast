@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ListView: View{
-    @ObservedObject var viewModel:FitcastManager
+    var viewModel:FitcastManager
     @Environment(\.colorScheme) var colorScheme
     @Binding var isListViewVisible:Bool
     @Environment(\.editMode) var editMode
@@ -20,20 +20,17 @@ struct ListView: View{
 //            }
             List(){
                 Button(action: {
-                    viewModel.updateLocation()    
-                    Task{
-                        await viewModel.getWeather()
-                    }
+                    viewModel.selectedCurrLocation = true
+                    viewModel.updateLocation()
                     self.isListViewVisible.toggle()
                 }, label: {
                     Text("현재 위치")
                 })
                 ForEach(viewModel.locationList, id:\.self){ location in
                     Button(action: {
+                        viewModel.selectedCurrLocation = false
                         viewModel.updateLocation(to: location)
-                        Task{
-                            await viewModel.getWeather()
-                        }
+                        viewModel.selectedLocationIdx = viewModel.locationList.firstIndex(of: location)!
                         self.isListViewVisible.toggle()
                     }, label: {
                         Text(location.title)

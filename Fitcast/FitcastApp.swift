@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct FitcastApp: App {
+    @AppStorage("selectedCurrLocation") var selectedCurrLocation:Bool = true
     var body: some Scene {
         WindowGroup {
             ContentView()

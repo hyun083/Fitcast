@@ -49,7 +49,7 @@ struct ContentView: View {
                 
                 //MARK: - AvgTemp
                 VStack{
-                    Text(viewModel.currAddress)
+                    Text(viewModel.addressLabel)
                         .font(.largeTitle)
                     Text("외출 시 평균 기온")
                     Text("\(viewModel.avgTemp)º")
@@ -136,20 +136,44 @@ struct ContentView: View {
                     })
                     Spacer()
                 }
-//                .padding(.bottom)
             }
             .task{
-                await viewModel.getWeather()
+                viewModel.selectedCurrLocation = viewModel.selectedLocationIdx >= viewModel.locationList.count ? true:viewModel.selectedCurrLocation
+                print("onTask",viewModel.selectedCurrLocation,viewModel.selectedLocationIdx)
+                let idx = viewModel.selectedLocationIdx
+                viewModel.selectedCurrLocation = viewModel.locationList.isEmpty || idx>=viewModel.locationList.count || idx<0 ? true:viewModel.selectedCurrLocation
+                
+                if viewModel.selectedCurrLocation{
+                    await viewModel.getWeather()
+                    await viewModel.updateUserAddress()
+                }else{
+                    let idx = viewModel.selectedLocationIdx
+                    viewModel.updateLocation(to: viewModel.locationList[idx])
+                    await viewModel.getWeather()
+                }
             }
             .onChange(of: scenePhase){
                 if scenePhase == .inactive{
-                    Task{
-                        WidgetCenter.shared.reloadAllTimelines()
+                    viewModel.selectedCurrLocation = viewModel.selectedLocationIdx >= viewModel.locationList.count ? true:viewModel.selectedCurrLocation
+                    if viewModel.selectedCurrLocation{
+                        print("update location and weather")
                         viewModel.updateLocation()
-                        await viewModel.getWeather()
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }else{
+                        Task{
+                            print("update weather")
+                            await viewModel.getWeather()
+                        }
                     }
                 }
             }
+            .onChange(of: viewModel.publishedLocation, {
+                Task{
+                    print("lastLocation changed:")
+                    await viewModel.getWeather()
+                    await viewModel.updateUserAddress()
+                }
+            })
         }
         .foregroundStyle(.white)
     }
@@ -169,7 +193,7 @@ struct WeatherView: View{
                 Image(systemName: symbolName)
                     .renderingMode(.original)
                     .shadow(radius: 1, y:1.3)
-
+                
                 Rectangle()
                     .foregroundStyle(.clear)
             }
