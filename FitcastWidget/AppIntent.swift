@@ -15,6 +15,15 @@ struct WidgetLocation: AppEntity{
     
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Location"
     static var defaultQuery = WidgetLocationQuery()
+    static var locationList = getLocationList()
+    
+    private static func getLocationList() -> [FitcastLocation]{
+        if let data = UserDefaults.shared.data(forKey: "locationList"){
+            return try! PropertyListDecoder().decode([FitcastLocation].self, from: data)
+        }else{
+            return [FitcastLocation]()
+        }
+    }
     
     var displayRepresentation: DisplayRepresentation{
         DisplayRepresentation(title: "\(id)")
@@ -22,7 +31,8 @@ struct WidgetLocation: AppEntity{
     
     static let locations: [WidgetLocation] = [
         WidgetLocation(id: "나의 위치", locatoin: CLLocation(latitude: 37.27807821976637, longitude: 127.15216520791188))
-    ]
+    ] 
+//    + locationList.map{WidgetLocation(id: $0.locality, locatoin: CLLocation(latitude: $0.latitude, longitude: $0.longitude))}
 }
 
 struct WidgetLocationQuery: EntityQuery {

@@ -27,6 +27,7 @@
 		D2C593822B234F280007A2F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 		D2C9C1142B494453002DDE8C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9C1132B494453002DDE8C /* SearchView.swift */; };
 		D2D9C2B32BD16F1400AC8C24 /* FitcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */; };
+		D2D9C2B72BD170B100AC8C24 /* WidgetLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9C2B62BD170B100AC8C24 /* WidgetLocationManager.swift */; };
 		D2E15B132B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +77,7 @@
 		D2C593792B234EAB0007A2F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C593802B234F180007A2F3 /* FitcastWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitcastWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D2C9C1132B494453002DDE8C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		D2DBBCB62AF0E5B60072ADF3 /* LocationMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMananger.swift; sourceTree = "<group>"; };
+		D2D9C2B62BD170B100AC8C24 /* WidgetLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLocationManager.swift; sourceTree = "<group>"; };
 		D2E15B122B15F349002C609F /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		D2F345A72AFA38D800CBE2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +196,7 @@
 			children = (
 				D2C593712B234EA90007A2F3 /* FitcastWidgetBundle.swift */,
 				D2C593732B234EA90007A2F3 /* FitcastWidget.swift */,
+				D2D9C2B62BD170B100AC8C24 /* WidgetLocationManager.swift */,
 				D2C593752B234EA90007A2F3 /* AppIntent.swift */,
 				D2C593772B234EAB0007A2F3 /* Assets.xcassets */,
 				D2C593792B234EAB0007A2F3 /* Info.plist */,
@@ -323,6 +325,7 @@
 				D2C593822B234F280007A2F3 /* extensions.swift in Sources */,
 				D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */,
 				D21A61972B8F376300343161 /* FitcastLocation.swift in Sources */,
+				D2D9C2B72BD170B100AC8C24 /* WidgetLocationManager.swift in Sources */,
 				D2C593722B234EA90007A2F3 /* FitcastWidgetBundle.swift in Sources */,
 				D2C593762B234EA90007A2F3 /* AppIntent.swift in Sources */,
 			);

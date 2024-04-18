@@ -11,7 +11,7 @@ import WeatherKit
 import CoreLocation
 
 struct Provider: AppIntentTimelineProvider {
-    let locationManager = LocationManager()
+    let locationManager = WidgetLocationManager()
     let service = WeatherService()
     
     private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
@@ -25,24 +25,38 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
+        let id = configuration.location.id
+        var serviceLocation = configuration.location.locatoin
+        var serviceAddress = configuration.location.id
+        
+        if id == "나의 위치"{
+            locationManager.locationManager.startUpdatingLocation()
+            serviceLocation = locationManager.lastLocation
+            serviceAddress = await locationManager.updateAddress()
+        }
+        
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
-                for: locationManager.lastLocation ,
+                for: id=="나의 위치" ? locationManager.lastLocation:configuration.location.locatoin,
               including: .current)
             return forecast
           }.value
-        locationManager.locationManager.startUpdatingLocation()
-        let address = locationManager.userAddress 
+        
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
         
-        return SimpleEntry(date: Date(), id: configuration.location.id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
+        return SimpleEntry(date: Date(), id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: Provider.seasons[temp.position])
     }
     
     func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
+        let id = configuration.location.id
+        var serviceLocation = configuration.location.locatoin
+        var serviceAddress = configuration.location.id
+        
+        
         let currentWeather = await Task.detached(priority: .userInitiated) {
             let forecast = try? await self.service.weather(
-                for: locationManager.lastLocation ,
+                for: id=="나의 위치" ? locationManager.lastLocation:configuration.location.locatoin ,
               including: .current)
             return forecast
           }.value
@@ -52,12 +66,17 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-            locationManager.locationManager.startUpdatingLocation()
-            let address = locationManager.userAddress
+            
+            if id == "나의 위치"{
+                locationManager.locationManager.startUpdatingLocation()
+                serviceLocation = locationManager.lastLocation
+                serviceAddress = await locationManager.updateAddress()
+            }
+            
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
             
-            let entry = SimpleEntry(date: entryDate, id: configuration.location.id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: address, recommandFit: Provider.seasons[temp.position])
+            let entry = SimpleEntry(date: entryDate, id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: Provider.seasons[temp.position])
             entries.append(entry)
         }
         
