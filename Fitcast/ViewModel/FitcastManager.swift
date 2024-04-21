@@ -42,6 +42,20 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
         locationManager.startUpdatingLocation()
         print(#function,"locationManager init")
         
+        publishedCurrLocation = (publishedLocationIdx >= locationList.count)||(locationList.isEmpty) ?
+        true:publishedCurrLocation
+        
+        Task{
+            if publishedCurrLocation{
+                await getWeather()
+                await updateAddress()
+            }else{
+                let idx = publishedLocationIdx
+                updateLocation(to: locationList[idx])
+                await getWeather()
+            }
+        }
+        
         WidgetCenter.shared.reloadAllTimelines()
     }
     

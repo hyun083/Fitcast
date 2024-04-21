@@ -137,20 +137,6 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            .task{
-                viewModel.selectedCurrLocation = viewModel.selectedLocationIdx >= viewModel.locationList.count ? true:viewModel.selectedCurrLocation
-                print("onTask",viewModel.selectedCurrLocation,viewModel.selectedLocationIdx)
-                let idx = viewModel.selectedLocationIdx
-                viewModel.selectedCurrLocation = viewModel.locationList.isEmpty || idx>=viewModel.locationList.count || idx<0 ? true:viewModel.selectedCurrLocation
-                
-                if viewModel.selectedCurrLocation{
-                    await viewModel.getWeather()
-                    await viewModel.updateUserAddress()
-                }else{
-                    let idx = viewModel.selectedLocationIdx
-                    viewModel.updateLocation(to: viewModel.locationList[idx])
-                    await viewModel.getWeather()
-                }
             }
             .onChange(of: scenePhase){
                 if scenePhase == .inactive{
