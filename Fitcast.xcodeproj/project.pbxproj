@@ -26,7 +26,6 @@
 		D2C5937C2B234EAB0007A2F3 /* FitcastWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D2C5936D2B234EA90007A2F3 /* FitcastWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D2C593822B234F280007A2F3 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 		D2C9C1142B494453002DDE8C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9C1132B494453002DDE8C /* SearchView.swift */; };
-		D2D9C2B32BD16F1400AC8C24 /* FitcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F345A2AEAA75A008BCEE3 /* FitcastManager.swift */; };
 		D2D9C2B72BD170B100AC8C24 /* WidgetLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9C2B62BD170B100AC8C24 /* WidgetLocationManager.swift */; };
 		D2E15B132B15F349002C609F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E15B122B15F349002C609F /* extensions.swift */; };
 /* End PBXBuildFile section */
@@ -321,7 +320,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2D9C2B32BD16F1400AC8C24 /* FitcastManager.swift in Sources */,
 				D2C593822B234F280007A2F3 /* extensions.swift in Sources */,
 				D2C593742B234EA90007A2F3 /* FitcastWidget.swift in Sources */,
 				D21A61972B8F376300343161 /* FitcastLocation.swift in Sources */,
@@ -488,13 +486,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -528,13 +527,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyun.Fitcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
