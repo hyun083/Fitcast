@@ -20,7 +20,7 @@ struct ListView: View{
 //            }
             List(){
                 Button(action: {
-                    viewModel.selectedCurrLocation = true
+                    viewModel.publishedCurrLocation = true
                     viewModel.updateLocation()
                     self.isListViewVisible.toggle()
                 }, label: {
@@ -28,9 +28,9 @@ struct ListView: View{
                 })
                 ForEach(viewModel.locationList, id:\.self){ location in
                     Button(action: {
-                        viewModel.selectedCurrLocation = false
+                        viewModel.publishedCurrLocation = false
                         viewModel.updateLocation(to: location)
-                        viewModel.selectedLocationIdx = viewModel.locationList.firstIndex(of: location)!
+                        viewModel.publishedLocationIdx = viewModel.locationList.firstIndex(of: location)!
                         self.isListViewVisible.toggle()
                     }, label: {
                         Text(location.title)

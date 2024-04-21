@@ -12,13 +12,16 @@ import WidgetKit
 
 @MainActor
 class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
-    @Published private var model: ForecastInfo?
+    private var locationStatus: CLAuthorizationStatus?
+    private let locationManager = CLLocationManager()
+    var locationList = getLocationList()
+    
     @Published var locationSearchService: LocationSearchService
     @Published private (set) var publishedLocation: CLLocation
     @Published private (set) var addressLabel: String
+    @Published private var forecast: ForecastInfo?
     
-    private var locationStatus: CLAuthorizationStatus?
-    private let locationManager = CLLocationManager()
+    private var weather: Weather?
     
     private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
     private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
@@ -26,9 +29,6 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
     private static let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
     private static let seasons = winter + autumn + spring + summer
     private static let tempRange = ["~ 4º","5 ~ 8º","9 ~ 11º","12 ~ 16º","17 ~ 19º","20 ~ 22º","23 ~ 27º","28º ~"]
-    
-    var locationList = getLocationList()
-    var weather: Weather?
     
     override init() {
         self.locationSearchService = LocationSearchService()
@@ -92,23 +92,27 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
         WidgetCenter.shared.reloadAllTimelines()
     }
     
-    func updateLocation(to location: FitcastLocation){
-        publishedLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        print(#function,publishedLocation)
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-    
-    func updateAddress() async -> String {
+    func updateAddress() async {
         let locale = Locale(identifier: UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first ?? "ko_KR")
         let geocoder = CLGeocoder()
         
         do{
             let placemark = try await geocoder.reverseGeocodeLocation(publishedLocation, preferredLocale: locale).last!
             print(#function,"location: \(publishedLocation), placemark:\(placemark.name!)")
-            return placemark.locality ?? placemark.subAdministrativeArea ?? placemark.administrativeArea ?? "--"
+            addressLabel = placemark.locality ?? placemark.subAdministrativeArea ?? placemark.administrativeArea ?? "--"
         }catch{
             fatalError("error on useraddress")
         }
+    }
+    
+    func updateLocation() {
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func updateLocation(to location: FitcastLocation){
+        publishedLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        print(#function,publishedLocation)
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     private static func getLocationList() -> [FitcastLocation]{
@@ -141,23 +145,15 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
     func moveLocation(From currIndex:IndexSet, to newIndex:Int){
         locationList.move(fromOffsets: currIndex, toOffset: newIndex)
     }
-   
-    func updateLocation() {
-        self.locationManager.startUpdatingLocation()
-    }
     
-    func updateUserAddress() async{
-        addressLabel = await self.updateAddress()
-    }
-    
-    var selectedCurrLocation: Bool = UserDefaults.shared.bool(forKey: "selectedCurrLocation"){
+    var publishedCurrLocation: Bool = UserDefaults.shared.bool(forKey: "selectedCurrLocation"){
         willSet{
             UserDefaults.shared.set(newValue, forKey: "selectedCurrLocation")
             objectWillChange.send()
         }
     }
     
-    var selectedLocationIdx: Int = UserDefaults.shared.integer(forKey: "selectedLoctionIdx"){
+    var publishedLocationIdx: Int = UserDefaults.shared.integer(forKey: "selectedLoctionIdx"){
         willSet{
             UserDefaults.shared.set(newValue, forKey: "selectedLoctionIdx")
             objectWillChange.send()
@@ -171,7 +167,7 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
             weather = try await Task.detached(priority: .userInitiated, operation: {
                 return try await WeatherService.shared.weather(for:.init(latitude: self.publishedLocation.coordinate.latitude,longitude: self.publishedLocation.coordinate.longitude))
             }).value
-            model = createForecastInfo()
+            forecast = createForecastInfo()
         } catch{
             fatalError("\(error)")
         }
@@ -191,29 +187,28 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
     }
     
     var closet: [ForecastInfo.Clothes]{
-        model?.closet ?? [ForecastInfo.Clothes]()
+        forecast?.closet ?? [ForecastInfo.Clothes]()
     }
     
     var currSymbolName: String{
-        model?.currSymbol ?? "xmark"
+        forecast?.currSymbol ?? "xmark"
     }
     
     var currTemp: Int{
-        Int(model?.currTemperature.value.rounded() ?? 0)
+        Int(forecast?.currTemperature.value.rounded() ?? 0)
     }
     
     var currCondition: String{
-        model?.currCondition.description ?? "Loading..."
+        forecast?.currCondition.description ?? "Loading..."
     }
     
     var hourlyWeatherInfo: Array<ForecastInfo.WeatherInfo>{
-        model?.hourlyWeather ?? Array<ForecastInfo.WeatherInfo>()
+        forecast?.hourlyWeather ?? Array<ForecastInfo.WeatherInfo>()
     }
     
     var currHour:Int{
-        model?.now ?? Int(Calendar.current.component(.hour, from: Date()))
+        forecast?.now ?? Int(Calendar.current.component(.hour, from: Date()))
     }
-    
     
     var startTime: Int = UserDefaults.shared.integer(forKey: "startTime"){
         willSet{
@@ -231,7 +226,7 @@ class FitcastManager: NSObject, ObservableObject, CLLocationManagerDelegate{
     
     var avgTemp: Int{
         get{
-            let hourlyForecast = model?.hourlyWeather ?? [ForecastInfo.WeatherInfo]()
+            let hourlyForecast = forecast?.hourlyWeather ?? [ForecastInfo.WeatherInfo]()
             let now = Int(Calendar.current.component(.hour, from: Date()))
             
             var lower = startTime

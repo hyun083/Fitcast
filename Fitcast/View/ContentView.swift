@@ -136,12 +136,12 @@ struct ContentView: View {
                     })
                     Spacer()
                 }
-            }
+                Spacer()
             }
             .onChange(of: scenePhase){
                 if scenePhase == .inactive{
-                    viewModel.selectedCurrLocation = viewModel.selectedLocationIdx >= viewModel.locationList.count ? true:viewModel.selectedCurrLocation
-                    if viewModel.selectedCurrLocation{
+                    viewModel.publishedCurrLocation = viewModel.publishedLocationIdx >= viewModel.locationList.count ? true:viewModel.publishedCurrLocation
+                    if viewModel.publishedCurrLocation{
                         print("update location and weather")
                         viewModel.updateLocation()
                         WidgetCenter.shared.reloadAllTimelines()
@@ -157,7 +157,7 @@ struct ContentView: View {
                 Task{
                     print("lastLocation changed:")
                     await viewModel.getWeather()
-                    await viewModel.updateUserAddress()
+                    await viewModel.updateAddress()
                 }
             })
         }
