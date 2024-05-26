@@ -11,72 +11,65 @@ import WeatherKit
 import CoreLocation
 
 struct Provider: AppIntentTimelineProvider {
-    let locationManager = WidgetLocationManager()
-    let service = WeatherService()
-    
-    private static let winter = ["패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리", "코트, 가죽 자켓, 기모"]
-    private static let autumn = ["코트, 야상, 점퍼, 스타킹, 기모바지", "자켓, 가디건, 청자켓, 니트, 스타킹, 청바지"]
-    private static let spring = ["가디건, 니트, 맨투맨, 후드, 긴바지", "블라우스, 긴팔티, 면바지, 슬랙스"]
-    private static let summer = ["반팔, 얆은 셔츠, 반바지, 면바지", "민소매, 반팔, 반바지, 치마, 린넨 옷"]
-    private static let seasons = winter + autumn + spring + summer
-    
+    let viewModel = FitcastWidgetManager()
+ 
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), id: SelectLocationIntent().location.id, currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
     }
 
     func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
         let id = configuration.location.id
-        var serviceLocation = configuration.location.locatoin
+        var serviceLocation = configuration.location.location
         var serviceAddress = configuration.location.id
         
         if id == "나의 위치"{
-            locationManager.locationManager.startUpdatingLocation()
-            serviceLocation = locationManager.lastLocation
-            serviceAddress = await locationManager.updateAddress()
+            viewModel.updateLocation()
+            serviceLocation = viewModel.lastLocation
+            serviceAddress = await viewModel.updateAddress()
+        }else{
+            viewModel.updateLocation(to: serviceLocation)
         }
         
-        let currentWeather = await Task.detached(priority: .userInitiated) {
-            let forecast = try? await self.service.weather(
-                for: id=="나의 위치" ? locationManager.lastLocation:configuration.location.locatoin,
-              including: .current)
-            return forecast
-          }.value
-        
+        await viewModel.getWeather()
+        let currentWeather = viewModel.weather
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
+        let recommendFit = viewModel.recommendFit(on: temp)
         
-        return SimpleEntry(date: Date(), id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: Provider.seasons[temp.position])
+        return SimpleEntry(date: Date(), id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
     }
     
     func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let id = configuration.location.id
-        var serviceLocation = configuration.location.locatoin
+        var serviceLocation = configuration.location.location
         var serviceAddress = configuration.location.id
-        
-        
-        let currentWeather = await Task.detached(priority: .userInitiated) {
-            let forecast = try? await self.service.weather(
-                for: id=="나의 위치" ? locationManager.lastLocation:configuration.location.locatoin ,
-              including: .current)
-            return forecast
-          }.value
-        
         var entries: [SimpleEntry] = []
-        
         let currentDate = Date()
+        
+        if id == "나의 위치"{
+            viewModel.updateLocation()
+            serviceLocation = viewModel.lastLocation
+            serviceAddress = await viewModel.updateAddress()
+        }else{
+            viewModel.updateLocation(to: serviceLocation)
+        }
+        
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
             
             if id == "나의 위치"{
-                locationManager.locationManager.startUpdatingLocation()
-                serviceLocation = locationManager.lastLocation
-                serviceAddress = await locationManager.updateAddress()
+                viewModel.updateLocation()
+                serviceLocation = viewModel.lastLocation
+                serviceAddress = await viewModel.updateAddress()
             }
             
+            await viewModel.getWeather()
+            let currentWeather = viewModel.weather
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
+            let recommendFit = viewModel.recommendFit(on: temp)
             
-            let entry = SimpleEntry(date: entryDate, id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: Provider.seasons[temp.position])
+            let entry = SimpleEntry(date: entryDate, id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
             entries.append(entry)
         }
         
