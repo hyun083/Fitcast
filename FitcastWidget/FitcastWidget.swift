@@ -14,7 +14,7 @@ struct Provider: AppIntentTimelineProvider {
     let viewModel = FitcastWidgetManager()
  
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), id: SelectLocationIntent().location.id, currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
+        SimpleEntry(date: Date(), id: SelectLocationIntent().location.id, coord: CLLocationCoordinate2D(), currTemp: "--", currSymbolName: "cloud.sun.fill", currAddress: "--", recommandFit: "--")
     }
 
     func snapshot(for configuration: SelectLocationIntent, in context: Context) async -> SimpleEntry {
@@ -35,8 +35,9 @@ struct Provider: AppIntentTimelineProvider {
         let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
         let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
         let recommendFit = viewModel.recommendFit(on: temp)
+        let coord = serviceLocation.coordinate
         
-        return SimpleEntry(date: Date(), id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
+        return SimpleEntry(date: Date(), id: id, coord: coord, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
     }
     
     func timeline(for configuration: SelectLocationIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -68,8 +69,9 @@ struct Provider: AppIntentTimelineProvider {
             let temp = Int(currentWeather?.temperature.value.rounded() ?? 0)
             let symbolName = currentWeather?.symbolName.safeSymbolName() ?? "xmark"
             let recommendFit = viewModel.recommendFit(on: temp)
+            let coord = serviceLocation.coordinate
             
-            let entry = SimpleEntry(date: entryDate, id: id, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
+            let entry = SimpleEntry(date: entryDate, id: id, coord: coord, currTemp: "\(temp)º", currSymbolName: symbolName, currAddress: serviceAddress, recommandFit: recommendFit)
             entries.append(entry)
         }
         
@@ -80,6 +82,7 @@ struct Provider: AppIntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let id: String
+    let coord: CLLocationCoordinate2D
     var currTemp: String
     var currSymbolName: String
     var currAddress: String
@@ -113,6 +116,7 @@ struct FitcastWidgetEntryView : View {
                 .foregroundStyle(.white)
             }
         }
+        .widgetURL(URL(string: "widgetLink://LocationInfo/?address=\(entry.id)&latitude=\(entry.coord.latitude)&longitude=\(entry.coord.longitude)"))
     }
 }
 
@@ -133,10 +137,10 @@ struct FitcastWidget: Widget {
 #Preview(as: .systemSmall) {
     FitcastWidget()
 } timeline: {
-    SimpleEntry(date: Date(), id: "나의 위치", currTemp: "4º", currSymbolName: "cloud.sun.fill", currAddress: "용인시", recommandFit: "패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리")
+    SimpleEntry(date: Date(), id: "나의 위치", coord: CLLocationCoordinate2D(), currTemp: "4º", currSymbolName: "cloud.sun.fill", currAddress: "용인시", recommandFit: "패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리")
 }
 #Preview(as: .systemMedium) {
     FitcastWidget()
 } timeline: {
-    SimpleEntry(date: Date(), id: "나의 위치", currTemp: "4º", currSymbolName: "cloud.sun.fill", currAddress: "용인시", recommandFit: "패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리")
+    SimpleEntry(date: Date(), id: "나의 위치", coord: CLLocationCoordinate2D(), currTemp: "4º", currSymbolName: "cloud.sun.fill", currAddress: "용인시", recommandFit: "패딩, 두꺼운 코트, 누빔 옷, 기모, 목도리")
 }
