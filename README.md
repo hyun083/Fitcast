@@ -46,7 +46,7 @@ SwiftUI에 알맞은 MVVM 패턴을 통해 뷰와 뷰모델간 3대1의 관계�
 |:---:|:---:|
 |SearchView에서는 주소 기반 장소 검색 기능을 제공하며, 항목을 누르게 되면 contentView로 전환되어 정보 확인이 가능합니다.|listView에서는 사용자가 searchView에서 선택했던 항목들을 확인 할 수 있으며 항목을 선택하게되면 contentView로 전환되어 정보를 확인 할 수 있습니다.|
 
-|![locationSelect](https://github.com/hyun083/Fitcast/assets/58415560/0dc2ec68-2784-4599-845b-302e8eccd392)|![Widgets](https://github.com/hyun083/Fitcast/assets/58415560/6d359d09-871d-4004-b73c-b637f071c35a)|![widget -> contentView](https://github.com/hyun083/Fitcast/assets/58415560/68c89007-d4af-4eac-bddf-1918ee5ceca2)
-|:---:|:---:|:---:|
-|위젯을 롱탭하면 리스트 뷰에서 볼 수 있는 저장된 장소 목록이 나옵니다.|해당 지역의 실시간 날씨 정보와 이에 알맞은 옷차림을 확인 할 수 있습니다.|위젯을 선택 시 위젯에서 보여주고 있는 지역의 정보를 contentView에 표시하여 앱 실행 최초화면으로 시작합니다.|
+|![locationSelect](https://github.com/user-attachments/assets/d35b0fab-6391-410f-adf7-9f8322149411)|![widget -> contentView](https://github.com/hyun083/Fitcast/assets/58415560/68c89007-d4af-4eac-bddf-1918ee5ceca2)
+|:---:|:---:|
+|위젯을 롱탭하면 편집 모드로 전환 할 수 있으며, 리스트 뷰에서 볼 수 있는 저장된 장소 목록을 통해 위젯이 표시할 지역을 선택할 수 있습니다.|위젯을 선택 시 위젯에서 보여주고 있는 지역의 정보를 contentView에 표시하여 앱 실행 최초화면으로 시작합니다.|
 
