@@ -160,6 +160,18 @@ struct ContentView: View {
                     await viewModel.updateAddress()
                 }
             })
+            .onOpenURL(perform: { url in
+                if let query = url.query()?.removingPercentEncoding{
+                    let info = query.split(separator: "&")
+                    let publishedLocation = String(info[0].split(separator: "=")[1])
+                    let latitude = Double(info[1].split(separator: "=")[1])!
+                    let longitude = Double(info[2].split(separator: "=")[1])!
+                    print("Open via widget: \(publishedLocation)")
+                    viewModel.publishedCurrLocation = false
+                    viewModel.publishedLocationIdx = -1
+                    viewModel.updateLocation(to: FitcastLocation(title: publishedLocation, locality: publishedLocation, latitude: latitude, longitude: longitude))
+                }
+            })
         }
         .foregroundStyle(.white)
     }
